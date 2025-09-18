@@ -487,7 +487,7 @@
                     "raw_data": {
                         "预期年化收益率": 2.198108577333041,
                         "年化波动率(风险)": 0.24068832378011498,
-                        "预期夏P比率": 9.07027205577059
+                        "预期夏普比率": 9.07027205577059
                     }
                 }
             },
@@ -553,8 +553,7 @@
 
             const annualReturn = (performanceDataRaw['预期年化收益率'] * 100).toFixed(2) + '%';
             const annualVolatility = (performanceDataRaw['年化波动率(风险)'] * 100).toFixed(2) + '%';
-            // 注意：JSON中实际字段名为 "预期夏P比率" 而非 "预期夏普比率"
-            const sharpeRatio = performanceDataRaw['预期夏P比率'].toFixed(2); 
+            const sharpeRatio = performanceDataRaw['预期夏普比率'].toFixed(2); 
 
             performanceMetricsList.innerHTML = `
                 <li><strong>预期年化收益率:</strong> <span>${annualReturn}</span></li>
