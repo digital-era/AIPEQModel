@@ -504,7 +504,13 @@
 
         // Fill in summary
         document.getElementById('summary-paragraph-1').innerHTML = `本报告由 <strong>${data['模型名称']}</strong> 于 <strong>${data['数据截止日期']}</strong> 生成，旨在提供基于量化交易策略的标的筛选与操作建议。`;
-        document.getElementById('summary-paragraph-2').innerHTML = `报告共筛选出 <strong>${data['步骤1_强势趋势标的'].数量}</strong> 支强势趋势标的。通过进一步的交易策略分析，我们识别出了存在明确“最大赔率买入”信号的标的，以及需要继续“中性/持有/等待”的观察标的。`;
+
+        // ########## START: MODIFIED CODE ##########
+        const buySignalCount = data['步骤2_交易策略分析']['买入信号标的报告'].length;
+        const holdObserveCount = data['步骤2_交易策略分析']['持有观察标的报告'].length;
+        document.getElementById('summary-paragraph-2').innerHTML = `报告共筛选出 <strong>${data['步骤1_强势趋势标的'].数量}</strong> 支强势趋势标的。通过进一步的交易策略分析，我们识别出了 <strong>${buySignalCount}</strong> 支存在明确“最大赔率买入”信号的标的，以及 <strong>${holdObserveCount}</strong> 支需要继续“中性/持有/等待”的观察标的。`;
+        // ########## END: MODIFIED CODE ##########
+
         document.getElementById('toc-strong-trend-stocks').innerHTML = `强势趋势标的 (${data['步骤1_强势趋势标的'].数量}支)`;
 
 
