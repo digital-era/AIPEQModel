@@ -485,7 +485,9 @@
             const firstStockDate = data.结果.最优投资组合配置.配置详情[0].最后一日日期;
             // 格式化为 "YYYY年MM月DD日"
             const dateParts = firstStockDate.split('-');
-            const formattedReportDate = `${dateParts[0]}年${dateParts[1]}月${dateParts[2]}日`; 
+            //const formattedReportDate = `${dateParts[0]}年${dateParts[1]}月${dateParts[2]}日`; 
+            const [year, month, day] = firstStockDate.split('-'); // 将 "2025-09-17" 分割成 ['2025', '09', '17']
+            const formattedReportDate = `${year}年${month}月${day}日`; // 使用模板字符串优雅地拼接
 
             pageTitleElement.textContent = `大智模型组合收益分析报告 - ${firstStockDate}`; // 更新页面标题
             reportDateElement.textContent = `报告日期: ${formattedReportDate}`;
