@@ -449,7 +449,7 @@
 
         // --- Data Insertion Logic ---
         // Embed the JSON data directly into the script
-        const data = {
+        const jsonData = {
           "模型名称": "标的策略生成器",
           "数据截止日期": "2025-09-17",
           "步骤1_强势趋势标的": {
@@ -496,7 +496,7 @@
           },
           "最终状态": "成功完成"
         };
-
+        const data = jsonData; 
         // Fill in header
         document.getElementById('model-name').textContent = data['模型名称'];
         document.getElementById('data-date').textContent = `数据截止日期: ${data['数据截止日期']}`;
