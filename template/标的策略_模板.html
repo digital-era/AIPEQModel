@@ -316,13 +316,14 @@
     </header>
 
     <div class="container">
+        <!-- ★★★ 第1处修改：为目录中的链接添加ID ★★★ -->
         <nav id="toc">
             <h2>报告目录</h2>
             <ul>
                 <li><a href="#summary">报告概要</a></li>
                 <li><a href="#strong-trend-stocks" id="toc-strong-trend-stocks">强势趋势标的</a></li>
-                <li><a href="#buy-signals-stocks">交易策略分析 - 买入信号</a></li>
-                <li><a href="#hold-observe-stocks">交易策略分析 - 持有观察</a></li>
+                <li><a href="#buy-signals-stocks" id="toc-buy-signals">交易策略分析 - 买入信号</a></li>
+                <li><a href="#hold-observe-stocks" id="toc-hold-observe">交易策略分析 - 持有观察</a></li>
             </ul>
         </nav>
 
@@ -509,6 +510,10 @@
         const buySignalCount = data['步骤2_交易策略分析']['买入信号标的报告'].length;
         const holdObserveCount = data['步骤2_交易策略分析']['持有观察标的报告'].length;
         document.getElementById('summary-paragraph-2').innerHTML = `报告共筛选出 <strong>${data['步骤1_强势趋势标的'].数量}</strong> 支强势趋势标的。通过进一步的交易策略分析，我们识别出了 <strong>${buySignalCount}</strong> 支存在明确“最大赔率买入”信号的标的，以及 <strong>${holdObserveCount}</strong> 支需要继续“中性/持有/等待”的观察标的。`;
+        
+        // ★★★ 第2处修改：使用JS更新目录文本 ★★★
+        document.getElementById('toc-buy-signals').textContent = `交易策略分析 - 买入信号 (${buySignalCount}支)`;
+        document.getElementById('toc-hold-observe').textContent = `交易策略分析 - 持有观察 (${holdObserveCount}支)`;
         // ########## END: MODIFIED CODE ##########
 
         document.getElementById('toc-strong-trend-stocks').innerHTML = `强势趋势标的 (${data['步骤1_强势趋势标的'].数量}支)`;
