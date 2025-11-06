@@ -152,7 +152,6 @@
             border: 1px dashed #ffe59c;
         }
 
-
         /* 关键指标网格 */
         .metrics-grid {
             display: grid;
@@ -265,7 +264,6 @@
             margin-bottom: 8px;
         }
 
-
         /* 页脚 */
         footer {
             text-align: center;
@@ -344,8 +342,6 @@
                 <li><a href="#section-performance-chart">收益表现</a></li>
                 <li><a href="#section-daily-data">每日数据</a></li>
                 <li><a href="#section-conclusion">结论</a></li>
-                <!-- 如果有声明与提示部分，可以添加此项 -->
-                <!-- <li><a href="#section-disclaimer">声明与提示</a></li> -->
             </ul>
         </nav>
 
@@ -424,15 +420,6 @@
             <p id="conclusion-paragraph-2" style="margin-top: 15px;"></p>
         </section>
 
-        <!-- 声明与提示 (可选，如果你的模型评估报告需要) -->
-        <!-- <section id="section-disclaimer" class="section details-section">
-            <h2>声明与提示</h2>
-            <details>
-                <summary>点击展开/收起 重要的声明与风险提示</summary>
-                <pre id="disclaimer-pre"></pre>
-            </details>
-        </section> -->
-
         <footer>
             <p id="footer-text"></p>
         </footer>
@@ -440,7 +427,7 @@
 
     <script>
         // 定义一个全局变量来存储JSON数据
-        var modelEvaluationData =  __JSON_DATA_PLACEHOLDER__;
+        var modelEvaluationData = __JSON_DATA_PLACEHOLDER__;
 
         document.addEventListener('DOMContentLoaded', function() {
             try {
@@ -453,11 +440,19 @@
                 }
             } catch (error) {
                 console.error("Error during report rendering:", error);
+                // 这里可以添加更详细的错误输出到页面，方便用户调试
+                document.getElementById('model-name-header').textContent = "页面渲染错误";
+                document.getElementById('report-subtitle').textContent = `详情请查看浏览器控制台: ${error.message}`;
                 alert('脚本执行出错: ' + error.name + ' - ' + error.message);
             }
         });
 
         function renderModelReport(data) {
+            // --- 获取 CSS 变量 ---
+            const getCssVar = (varName) => getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+            const primaryColor = getCssVar('--primary-color'); // 获取 --primary-color 的值
+            const secondaryColor = getCssVar('--secondary-color'); // 如果其他地方也需要，一并获取
+
             // --- 格式化辅助函数 ---
             const formatPercentage = (value, decimals = 2) => {
                 if (typeof value !== 'number' || isNaN(value)) return 'N/A';
@@ -534,7 +529,7 @@
                                 size: 16,
                                 weight: 'bold'
                             },
-                            color: var(--primary-color)
+                            color: primaryColor // 使用获取到的 JavaScript 变量
                         },
                         tooltip: {
                             callbacks: {
@@ -575,7 +570,7 @@
             const dailyDataTableBody = document.getElementById('daily-data-table-body');
             dailyDataTableBody.innerHTML = ''; // 清空现有内容
             dailyData.forEach(item => {
-                const row = dailyDataTableBody.insertRow();
+                const row = dailyDataTableBody.insertRow(); // 正确：在 tbody 上插入行
                 row.insertCell().textContent = item["日期"];
 
                 const dailyReturnCell = row.insertCell();
@@ -598,12 +593,6 @@
             document.getElementById('conclusion-point-3').textContent = `风险调整后收益优异：夏普比率高达${formatNumber(data["夏普比率"])}`;
             document.getElementById('conclusion-point-4').textContent = `恢复能力强：在最大回撤后能够快速恢复并创新高`;
             document.getElementById('conclusion-paragraph-2').textContent = `总体而言，${modelName}是一个表现优异的投资策略模型，具有良好的风险收益特征，适合作为投资组合的重要组成部分。`;
-
-            // --- (可选) 填充声明与提示 ---
-            // const disclaimerPre = document.getElementById('disclaimer-pre');
-            // if (disclaimerPre && data["声明与提示"]) {
-            //     disclaimerPre.textContent = data["声明与提示"];
-            // }
 
             // --- 7. 更新页脚信息 ---
             document.getElementById('footer-text').textContent = `报告生成时间：${reportDate} | 数据来源：${modelName}评估.json`;
