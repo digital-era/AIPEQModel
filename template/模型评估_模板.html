@@ -480,7 +480,7 @@
 
             // --- 2. 填充报告摘要 ---
             document.getElementById('summary-paragraph-1').textContent = `本报告基于${modelName}在${firstDate}至${lastDate}期间的交易表现数据，从总收益率、年化收益率、最大回撤率和夏普比率等多个维度对模型进行了全面评估。`;
-            document.getElementById('summary-paragraph-2').textContent = `${modelName}在此期间表现${data["总收益率"] >= 0 ? '优异' : '较差'}，实现了${formatPercentage(data["总收益率"])}的总收益率，年化收益率达到${formatPercentage(data["年化收益率"] / 100)}，同时${data["最大回撤率"] <= -0.05 ? '面临较高风险' : '保持了较低的风险水平'}，最大回撤仅为${formatPercentage(data["最大回撤率"])}，夏普比率高达${formatNumber(data["夏普比率"])}，表明模型在风险调整后的收益表现${data["夏普比率"] >= 1 ? '非常出色' : '一般' }。`;
+            document.getElementById('summary-paragraph-2').textContent = `${modelName}在此期间表现${data["总收益率"] >= 0 ? '优异' : '较差'}，实现了${formatPercentage(data["总收益率"])}的总收益率，年化收益率达到${formatPercentage(data["年化收益率"])}，同时${data["最大回撤率"] <= -0.05 ? '面临较高风险' : '保持了较低的风险水平'}，最大回撤仅为${formatPercentage(data["最大回撤率"])}，夏普比率高达${formatNumber(data["夏普比率"])}，表明模型在风险调整后的收益表现${data["夏普比率"] >= 1 ? '非常出色' : '一般' }。`;
 
             // --- 3. 填充关键指标 ---
             const totalReturnEl = document.getElementById('total-return');
@@ -488,7 +488,7 @@
             totalReturnEl.classList.add(data["总收益率"] >= 0 ? 'metric-positive' : 'metric-negative');
 
             const annualizedReturnEl = document.getElementById('annualized-return');
-            annualizedReturnEl.textContent = formatPercentage(data["年化收益率"] / 100); // 假设年化收益率是百分比值，如 9.09，需要除以100
+            annualizedReturnEl.textContent = formatPercentage(data["年化收益率"]); // 已更正：直接格式化为百分比，无需除以100
             annualizedReturnEl.classList.add(data["年化收益率"] >= 0 ? 'metric-positive' : 'metric-negative');
 
             const maxDrawdownEl = document.getElementById('max-drawdown');
