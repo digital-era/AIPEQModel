@@ -522,7 +522,7 @@
                 sharpeStatus = '一般';
             }
 
-            document.getElementById('summary-paragraph-2').textContent = `${modelName}在此期间整体表现${performanceStatus}，实现了${formatPercentage(data["总收益率"])}的总收益率，年化收益率达到${formatPercentage(annualizedReturn)}，同时${riskDescription}，最大回撤仅为${formatPercentage(maxDrawdown)}，夏普比率高达${formatNumber(sharpeRatio)}，表明模型在风险调整后的收益表现${sharpeStatus}。`;
+            document.getElementById('summary-paragraph-2').textContent = `${modelName}在此期间整体表现${performanceStatus}，实现了${formatPercentage(data["总收益率"])}的总收益率，年化收益率达到${formatPercentage(annualizedReturn)}，同时${riskDescription}，最大回撤为${formatPercentage(maxDrawdown)}，夏普比率为${formatNumber(sharpeRatio)}，表明模型在风险调整后的收益表现${sharpeStatus}。`;
             // --- 3. 填充关键指标 (保持不变) ---
             const totalReturnEl = document.getElementById('total-return');
             totalReturnEl.textContent = formatPercentage(data["总收益率"]);
