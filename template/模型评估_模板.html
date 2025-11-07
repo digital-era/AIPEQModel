@@ -478,27 +478,69 @@
             document.getElementById('model-name-header').textContent = `${modelName}评估报告`;
             document.getElementById('report-subtitle').textContent = `基于${firstDate}至${lastDate}的交易数据分析`;
 
-            // --- 2. 填充报告摘要 ---
-            document.getElementById('summary-paragraph-1').textContent = `本报告基于${modelName}在${firstDate}至${lastDate}期间的交易表现数据，从总收益率、年化收益率、最大回撤率和夏普比率等多个维度对模型进行了全面评估。`;
-            document.getElementById('summary-paragraph-2').textContent = `${modelName}在此期间表现${data["总收益率"] >= 0 ? '优异' : '较差'}，实现了${formatPercentage(data["总收益率"])}的总收益率，年化收益率达到${formatPercentage(data["年化收益率"])}，同时${data["最大回撤率"] <= -0.05 ? '面临较高风险' : '保持了较低的风险水平'}，最大回撤仅为${formatPercentage(data["最大回撤率"])}，夏普比率高达${formatNumber(data["夏普比率"])}，表明模型在风险调整后的收益表现${data["夏普比率"] >= 1 ? '非常出色' : '一般' }。`;
+            // 【修改开始】
 
-            // --- 3. 填充关键指标 ---
+            // 提取关键指标
+            const annualizedReturn = data["年化收益率"];
+            const maxDrawdown = data["最大回撤率"];
+            const sharpeRatio = data["夏普比率"];
+
+            // --- 2. 填充报告摘要 (summary-paragraph-2) ---
+            document.getElementById('summary-paragraph-1').textContent = `本报告基于${modelName}在${firstDate}至${lastDate}期间的交易表现数据，从总收益率、年化收益率、最大回撤率和夏普比率等多个维度对模型进行了全面评估。`;
+
+            // 2.1 收益状态分类（至少三种：优异、良好、一般、较差）
+            let performanceStatus = '';
+            if (annualizedReturn >= 0.15) { // 年化收益率 >= 15%
+                performanceStatus = '优异';
+            } else if (annualizedReturn >= 0.05) { // 5% <= 年化收益率 < 15%
+                performanceStatus = '良好';
+            } else if (annualizedReturn >= 0.00) { // 0% <= 年化收益率 < 5%
+                performanceStatus = '一般';
+            } else { // 年化收益率 < 0%
+                performanceStatus = '较差';
+            }
+
+            // 2.2 最大回撤率风险描述（分类标准修改：-0.05, -0.15）
+            let riskDescription = '';
+            if (maxDrawdown > -0.05) { // 回撤小于 5%
+                riskDescription = '保持了极低的风险水平';
+            } else if (maxDrawdown > -0.15) { // 回撤在 5% 到 15% 之间
+                riskDescription = '风险控制在合理范围';
+            } else { // 回撤大于 15%
+                riskDescription = '面临较高的风险';
+            }
+
+            // 2.3 夏普比率描述
+            let sharpeStatus = '';
+            if (sharpeRatio >= 2.0) {
+                sharpeStatus = '非常突出';
+            } else if (sharpeRatio >= 1.0) {
+                sharpeStatus = '优秀';
+            } else if (sharpeRatio >= 0.5) {
+                sharpeStatus = '良好';
+            } else {
+                sharpeStatus = '一般';
+            }
+
+            document.getElementById('summary-paragraph-2').textContent = `${modelName}在此期间整体表现${performanceStatus}，实现了${formatPercentage(data["总收益率"])}的总收益率，年化收益率达到${formatPercentage(annualizedReturn)}，同时${riskDescription}，最大回撤仅为${formatPercentage(maxDrawdown)}，夏普比率高达${formatNumber(sharpeRatio)}，表明模型在风险调整后的收益表现${sharpeStatus}。`;
+            // --- 3. 填充关键指标 (保持不变) ---
             const totalReturnEl = document.getElementById('total-return');
             totalReturnEl.textContent = formatPercentage(data["总收益率"]);
             totalReturnEl.classList.add(data["总收益率"] >= 0 ? 'metric-positive' : 'metric-negative');
 
             const annualizedReturnEl = document.getElementById('annualized-return');
-            annualizedReturnEl.textContent = formatPercentage(data["年化收益率"]); // 已更正：直接格式化为百分比，无需除以100
-            annualizedReturnEl.classList.add(data["年化收益率"] >= 0 ? 'metric-positive' : 'metric-negative');
+            annualizedReturnEl.textContent = formatPercentage(annualizedReturn);
+            annualizedReturnEl.classList.add(annualizedReturn >= 0 ? 'metric-positive' : 'metric-negative');
 
             const maxDrawdownEl = document.getElementById('max-drawdown');
-            maxDrawdownEl.textContent = formatPercentage(data["最大回撤率"]);
-            maxDrawdownEl.classList.add(data["最大回撤率"] < 0 ? 'metric-negative' : 'metric-positive'); // 回撤是负值表示损失
+            maxDrawdownEl.textContent = formatPercentage(maxDrawdown);
+            maxDrawdownEl.classList.add(maxDrawdown < 0 ? 'metric-negative' : 'metric-positive');
 
             const sharpeRatioEl = document.getElementById('sharpe-ratio');
-            sharpeRatioEl.textContent = formatNumber(data["夏普比率"]);
-            sharpeRatioEl.classList.add(data["夏普比率"] >= 0 ? 'metric-neutral' : 'metric-negative');
-
+            sharpeRatioEl.textContent = formatNumber(sharpeRatio);
+            sharpeRatioEl.classList.add(sharpeRatio >= 0 ? 'metric-neutral' : 'metric-negative');
+            
+            // ... (省略图表和表格填充部分，保持原样)
             // --- 4. 绘制收益表现图表 ---
             const dates = dailyData.map(item => item["日期"]);
             const cumulativeReturns = dailyData.map(item => item["累计收益率"]);
@@ -586,16 +628,80 @@
                 maxDrawdownDailyCell.classList.add(item["最大回撤率（至当日）"] < 0 ? 'negative' : 'positive');
             });
 
-            // --- 6. 填充结论 ---
-            document.getElementById('conclusion-paragraph-1').textContent = `${modelName}在评估期间表现出色，实现了稳健的正收益，同时保持了较低的风险水平。模型具有以下特点：`;
-            document.getElementById('conclusion-point-1').textContent = `收益稳定：在大多数交易日实现正收益`;
-            document.getElementById('conclusion-point-2').textContent = `风险控制良好：最大回撤率仅为${formatPercentage(data["最大回撤率"])}`;
-            document.getElementById('conclusion-point-3').textContent = `风险调整后收益优异：夏普比率高达${formatNumber(data["夏普比率"])}`;
-            document.getElementById('conclusion-point-4').textContent = `恢复能力强：在最大回撤后能够快速恢复并创新高`;
-            document.getElementById('conclusion-paragraph-2').textContent = `总体而言，${modelName}是一个表现优异的投资策略模型，具有良好的风险收益特征，适合作为投资组合的重要组成部分。`;
+
+            // --- 6. 填充结论 (conclusion-paragraph 和 conclusion-point) ---
+
+            // 6.1 根据关键指标确定整体结论的基调（conclusion-paragraph-1）
+            let overallTone = '';
+            if (annualizedReturn >= 0.10 && sharpeRatio >= 1.0) {
+                overallTone = '卓越，风险收益特征非常优秀';
+            } else if (annualizedReturn >= 0.00 && sharpeRatio >= 0.5) {
+                overallTone = '稳健，具有较高的投资价值';
+            } else {
+                overallTone = '一般，风险控制和/或收益有待优化';
+            }
+
+            document.getElementById('conclusion-paragraph-1').textContent = `${modelName}在评估期间表现${overallTone}。综合关键指标分析，模型具有以下特点：`;
+
+            // 6.2 结论要点分类总结 (conclusion-point-1 到 4)
+            // Point 1: 收益
+            let point1Content = '';
+            if (annualizedReturn >= 0.10) {
+                point1Content = `收益强劲：年化收益率达到${formatPercentage(annualizedReturn)}，远超一般市场基准。`;
+            } else if (annualizedReturn >= 0.00) {
+                point1Content = `收益为正：实现了${formatPercentage(annualizedReturn)}的年化收益率，模型盈利能力稳定。`;
+            } else {
+                point1Content = `收益待改进：年化收益率为${formatPercentage(annualizedReturn)}，模型尚未实现正向盈利。`;
+            }
+            document.getElementById('conclusion-point-1').textContent = point1Content;
+
+            // Point 2: 风险/回撤
+            let point2Content = '';
+            if (maxDrawdown > -0.05) {
+                point2Content = `风险极低：最大回撤率仅为${formatPercentage(maxDrawdown)}，显示出卓越的风险控制能力。`;
+            } else if (maxDrawdown > -0.15) {
+                point2Content = `风险可控：最大回撤率为${formatPercentage(maxDrawdown)}，属于投资中等风险可接受范围。`;
+            } else {
+                point2Content = `风险偏高：最大回撤率达到${formatPercentage(maxDrawdown)}，需要密切关注潜在的损失风险。`;
+            }
+            document.getElementById('conclusion-point-2').textContent = point2Content;
+
+            // Point 3: 夏普比率/风险调整后收益
+            let point3Content = '';
+            if (sharpeRatio >= 1.5) {
+                point3Content = `风险调整后收益突出：夏普比率高达${formatNumber(sharpeRatio)}，风险报酬效率极高。`;
+            } else if (sharpeRatio >= 0.5) {
+                point3Content = `风险调整后收益良好：夏普比率${formatNumber(sharpeRatio)}，投资性价比高。`;
+            } else {
+                point3Content = `风险调整后收益一般：夏普比率${formatNumber(sharpeRatio)}，模型在承担风险后获得的收益效率不高。`;
+            }
+            document.getElementById('conclusion-point-3').textContent = point3Content;
+
+            // Point 4: 稳定性/建议 (通用适应性要点)
+            let point4Content = '';
+            if (overallTone.includes('卓越') || overallTone.includes('稳健')) {
+                point4Content = `持续性强：模型表现出较强的持续性盈利能力，能够在市场波动中保持稳定。`;
+            } else {
+                point4Content = `鲁棒性需关注：模型在市场不利时表现脆弱，建议增强策略的鲁棒性和稳定性。`;
+            }
+            document.getElementById('conclusion-point-4').textContent = point4Content;
+
+            // 6.3 最终结论 (conclusion-paragraph-2)
+            let finalConclusion = '';
+            if (overallTone.includes('卓越')) {
+                finalConclusion = `总体而言，${modelName}是一个表现**卓越**的投资策略模型，具有良好的风险收益特征，适合作为投资组合的**重要**组成部分。`;
+            } else if (overallTone.includes('稳健')) {
+                finalConclusion = `总体而言，${modelName}是一个表现**稳健**的投资策略模型，具有一定的投资价值，建议根据风险偏好**适度**配置。`;
+            } else {
+                finalConclusion = `总体而言，${modelName}模型表现**一般**，建议进行进一步的参数调整或策略优化，以提升收益和风险控制能力。`;
+            }
+            document.getElementById('conclusion-paragraph-2').textContent = finalConclusion;
+
 
             // --- 7. 更新页脚信息 ---
             document.getElementById('footer-text').textContent = `报告生成时间：${reportDate} | 数据来源：${modelName}评估.json`;
+            
+            // 【修改结束】
         }
     </script>
 </body>
