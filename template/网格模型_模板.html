@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="report-page-title">网格模型策略报告</title>
+    <style>
+        /* 全局样式 */
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+        /* 头部 */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+            border-bottom: 2px solid #eceff1;
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            color: #34495e;
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-left: 5px solid #3498db;
+            padding-left: 10px;
+        }
+        
+        /* 网格模型容器 */
+        .grid-model-container {
+            margin-bottom: 40px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #fdfdfd;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+        }
+
+        /* 网格模型摘要信息 */
+        .model-summary {
+            margin-bottom: 20px;
+            background-color: #e9f5f9;
+            border: 1px solid #d0edf7;
+            border-radius: 6px;
+            padding: 15px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .summary-item {
+            font-size: 1.1em;
+            color: #2980b9;
+        }
+        
+        .summary-item strong {
+            color: #34495e;
+            min-width: 100px;
+            display: inline-block;
+        }
+
+        .summary-item .value {
+            font-weight: bold;
+        }
+
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f8f8;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* 移动端适配 */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            
+            .model-summary {
+                grid-template-columns: 1fr; /* 在小屏幕上单列显示 */
+            }
+
+            table { min-width: 800px; }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>网格模型策略报告</h1>
+        <p id="report-date" style="text-align: center; color: #6c757d; font-size: 0.95em;"></p>
+        
+        <!-- ETF 网格模型区域 -->
+        <section id="etf-grid-models-section">
+            <h2>ETF 网格模型</h2>
+            <div id="etf-grid-models-content">
+                <!-- JavaScript将在此处填充ETF网格模型 -->
+            </div>
+        </section>
+
+        <!-- STK 网格模型区域 -->
+        <section id="stk-grid-models-section">
+            <h2>STK 网格模型</h2>
+            <div id="stk-grid-models-content">
+                <!-- JavaScript将在此处填充STK网格模型 -->
+            </div>
+        </section>
+
+        <footer style="text-align: center; margin-top: 50px; font-size: 0.85em; color: #6c757d; border-top: 1px solid #e0e0e0; padding-top: 20px;">
+            <p>&copy; 2025 数据模型. 所有权利保留.</p>
+        </footer>
+    </div>
+
+    <script>
+        // --- 1. 定义JSON数据变量 ---
+        // 在实际应用中，这个占位符将被真实的JSON字符串替换
+        const jsonData = __JSON_DATA_PLACEHOLDER__;
+
+        /**
+         * 创建单个网格模型的HTML结构
+         * @param {object} modelData - 单个网格模型的数据
+         * @returns {string} - 生成的HTML字符串
+         */
+        function createGridModelHTML(modelData) {
+            // 构建摘要信息
+            const summaryHTML = `
+                <div class="model-summary">
+                    <div class="summary-item"><strong>名称:</strong> <span class="value">${modelData.name} (${modelData.code})</span></div>
+                    <div class="summary-item"><strong>价格区间:</strong> <span class="value">${modelData.price_range}</span></div>
+                    <div class="summary-item"><strong>总投入资金:</strong> <span class="value">${modelData.total_capital.toLocaleString()}</span></div>
+                    <div class="summary-item"><strong>每格资金:</strong> <span class="value">${modelData.capital_per_grid.toLocaleString()}</span></div>
+                </div>
+            `;
+            
+            // 构建表格头部
+            const tableHeadHTML = `
+                <thead>
+                    <tr>
+                        <th>档位</th>
+                        <th>买入价格</th>
+                        <th>卖出价格</th>
+                        <th>投入资金</th>
+                        <th>预估份额</th>
+                        <th>预估单笔盈利</th>
+                    </tr>
+                </thead>
+            `;
+
+            // 构建表格行
+            const tableBodyHTML = modelData.grids.map(grid => `
+                <tr>
+                    <td>${grid.level}</td>
+                    <td>${grid.buy_price.toFixed(3)}</td>
+                    <td>${grid.sell_price.toFixed(3)}</td>
+                    <td>${grid.capital_amount.toLocaleString()}</td>
+                    <td>${grid.estimated_shares.toLocaleString()}</td>
+                    <td>${grid.estimated_profit.toFixed(2)}</td>
+                </tr>
+            `).join('');
+
+            // 组合成完整的HTML块
+            return `
+                <div class="grid-model-container">
+                    ${summaryHTML}
+                    <div class="table-responsive">
+                        <table>
+                            ${tableHeadHTML}
+                            <tbody>
+                                ${tableBodyHTML}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
+
+        /**
+         * 主渲染函数
+         */
+        function renderGridModels() {
+            try {
+                const etfModels = jsonData.ETF.grid_models;
+                const stkModels = jsonData.STK.grid_models;
+
+                const etfContainer = document.getElementById('etf-grid-models-content');
+                const stkContainer = document.getElementById('stk-grid-models-content');
+
+                let etfHTML = '';
+                for (const code in etfModels) {
+                    if (Object.hasOwnProperty.call(etfModels, code)) {
+                        etfHTML += createGridModelHTML(etfModels[code]);
+                    }
+                }
+                etfContainer.innerHTML = etfHTML;
+                
+                let stkHTML = '';
+                for (const code in stkModels) {
+                    if (Object.hasOwnProperty.call(stkModels, code)) {
+                        stkHTML += createGridModelHTML(stkModels[code]);
+                    }
+                }
+                stkContainer.innerHTML = stkHTML;
+
+                // 更新报告日期
+                const reportDateElement = document.getElementById('report-date');
+                const today = new Date();
+                reportDateElement.textContent = `报告生成日期: ${today.getFullYear()}年${today.getMonth() + 1}月${today.getDate()}日`;
+
+            } catch (error) {
+                console.error('渲染网格模型时发生错误:', error);
+                // 可以在页面上显示一个错误提示
+                document.body.innerHTML = '<h2>抱歉，报告生成失败。</h2><p>错误详情: ' + error.message + '</p>';
+            }
+        }
+
+        // --- 2. DOM加载完成后执行渲染 ---
+        document.addEventListener('DOMContentLoaded', renderGridModels);
+
+    </script>
+</body>
+</html>
