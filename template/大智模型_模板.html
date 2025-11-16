@@ -218,6 +218,43 @@
             display: inline-block;
         }
 
+        /* **** 新增：风控因子分析样式 **** */
+        .risk-control-factors {
+            margin-top: 30px;
+            background-color: #fefefe; /* 浅白色背景 */
+            border: 1px solid #e0e0e0;   /* 灰色边框 */
+            border-radius: 6px;
+            padding: 20px;
+        }
+
+        .risk-control-factors h2 {
+            margin-top: 0;
+            padding-left: 0;
+            border-left: none;
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .risk-control-factors ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .risk-control-factors li {
+            margin-bottom: 12px;
+            font-size: 1.05em;
+            color: #34495e; /* 标签和值的颜色 */
+        }
+
+        .risk-control-factors li strong {
+            color: #3498db; /* 标签突出显示为蓝色 */
+            min-width: 180px; /* 确保标签对齐 */
+            display: inline-block;
+        }
+        /* **** /新增 **** */
+
         /* 移动端适配 */
         @media (max-width: 768px) {
             body {
@@ -305,6 +342,8 @@
                 <li><a href="#section-disclaimer">声明与提示</a></li>
                 <li><a href="#section-optimal-portfolio">最优投资组合配置</a></li>
                 <li><a href="#section-performance">组合预期历史表现</a></li>
+                <!-- **** 新增：风控因子分析目录链接 **** -->
+                <li><a href="#section-risk-control">风控因子分析</a></li>
             </ul>
         </nav>
 
@@ -350,6 +389,15 @@
                 </ul>
             </div>
         </section>
+        
+        <!-- **** 新增：风控因子分析区域 **** -->
+        <section id="section-risk-control" class="risk-control-factors">
+            <h2><a href="#section-risk-control" style="text-decoration: none; color: inherit;">风控因子分析</a></h2>
+            <ul id="risk-control-list">
+                <!-- JS会在这里填充风控因子 -->
+            </ul>
+        </section>
+        <!-- **** /新增 **** -->
 
         <footer style="text-align: center; margin-top: 50px; font-size: 0.85em; color: #6c757d; border-top: 1px solid #e0e0e0; padding-top: 20px;">
             <p>&copy; 2025 大智模型. 所有权利保留. <span id="footer-date"></span></p>
@@ -373,9 +421,6 @@
             const pageTitleElement = document.getElementById('report-page-title');
 
             const firstStockDate = data.结果.最优投资组合配置.配置详情[0].最后一日日期;
-            // 格式化为 "YYYY年MM月DD日"
-            const dateParts = firstStockDate.split('-');
-            //const formattedReportDate = `${dateParts[0]}年${dateParts[1]}月${dateParts[2]}日`; 
             const [year, month, day] = firstStockDate.split('-'); // 将 "2025-09-17" 分割成 ['2025', '09', '17']
             const formattedReportDate = `${year}年${month}月${day}日`; // 使用模板字符串优雅地拼接
 
@@ -389,8 +434,8 @@
             const portfolioTableBody = document.getElementById('portfolio-table-body');
             let portfolioRowsHtml = "";
             data.结果.最优投资组合配置.配置详情.forEach(item => {
-                const lastPrice = item['最近一日价格'] !== null ? item['最近一日价格'].toFixed(2) : 'N/A'; // 格式化价格到两位小数
-                const potScore = item['PotScore'] !== null && typeof item['PotScore'] === 'number' ? item['PotScore'].toFixed(2) : item['PotScore']; // PotScore可能为null或非数字
+                const lastPrice = item['最近一日价格'] !== null ? item['最近一日价格'].toFixed(2) : 'N/A';
+                const potScore = item['PotScore'] !== null && typeof item['PotScore'] === 'number' ? item['PotScore'].toFixed(2) : item['PotScore'];
                 
                 let changeClass = "price-change-neutral";
                 try {
@@ -400,9 +445,7 @@
                     } else if (changeValue < 0) {
                         changeClass = "price-change-negative";
                     }
-                } catch (e) {
-                    // 如果解析失败，保持中性色
-                }
+                } catch (e) {}
 
                 portfolioRowsHtml += `
                     <tr>
@@ -424,7 +467,6 @@
 
             const annualReturn = (performanceDataRaw['预期年化收益率'] * 100).toFixed(2) + '%';
             const annualVolatility = (performanceDataRaw['年化波动率(风险)'] * 100).toFixed(2) + '%';
-            // 根据您提供的最新JSON，raw_data中夏普比率的key是 "预期夏普比率"
             const sharpeRatio = performanceDataRaw['预期夏普比率'].toFixed(2); 
 
             performanceMetricsList.innerHTML = `
@@ -432,6 +474,23 @@
                 <li><strong>年化波动率 (风险):</strong> <span>${annualVolatility}</span></li>
                 <li><strong>预期夏普比率:</strong> <span>${sharpeRatio}</span></li>
             `;
+
+            // --- **** 6. 新增：提取并填充“风控因子分析”数据 **** ---
+            const riskControlList = document.getElementById('risk-control-list');
+            const riskControlData = data.结果.风控因子信息;
+
+            if (riskControlData) { // 检查风控数据是否存在
+                riskControlList.innerHTML = `
+                    <li><strong>决策日期:</strong> <span>${riskControlData.决策日期}</span></li>
+                    <li><strong>市场宽度得分:</strong> <span>${riskControlData['市场宽度得分']}</span></li>
+                    <li><strong>资金流得分:</strong> <span>${riskControlData['资金流得分']}</span></li>
+                    <li><strong>持仓结构得分:</strong> <span>${riskControlData['持仓结构得分']}</span></li>
+                    <li><strong>综合建议仓位因子:</strong> <span>${riskControlData['综合建议仓位因子']}</span></li>
+                `;
+            } else {
+                riskControlList.innerHTML = '<li><strong>风控信息:</strong> <span>暂无风控因子数据。</span></li>';
+            }
+            // --- **** /新增 **** ---
         });
     </script>
 </body>
