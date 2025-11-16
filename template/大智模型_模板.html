@@ -420,7 +420,7 @@
             const footerDateElement = document.getElementById('footer-date');
             const pageTitleElement = document.getElementById('report-page-title');
 
-            const firstStockDate = data.结果.最优投资组合配置.配置详情[0].最后一日日期;
+            const firstStockDate = data.结果.最优投资组合配置.配置详情.最后一日日期;
             const [year, month, day] = firstStockDate.split('-'); // 将 "2025-09-17" 分割成 ['2025', '09', '17']
             const formattedReportDate = `${year}年${month}月${day}日`; // 使用模板字符串优雅地拼接
 
@@ -475,22 +475,23 @@
                 <li><strong>预期夏普比率:</strong> <span>${sharpeRatio}</span></li>
             `;
 
-            // --- **** 6. 新增：提取并填充“风控因子分析”数据 **** ---
+            // --- **** 6. 修正：提取并填充“风控因子分析”数据 **** ---
             const riskControlList = document.getElementById('risk-control-list');
             const riskControlData = data.结果.风控因子信息;
 
             if (riskControlData) { // 检查风控数据是否存在
-                riskControlList.innerHTML = `
-                    <li><strong>决策日期:</strong> <span>${riskControlData.决策日期}</span></li>
-                    <li><strong>市场宽度得分:</strong> <span>${riskControlData['市场宽度得分']}</span></li>
-                    <li><strong>资金流得分:</strong> <span>${riskControlData['资金流得分']}</span></li>
-                    <li><strong>持仓结构得分:</strong> <span>${riskControlData['持仓结构得分']}</span></li>
-                    <li><strong>综合建议仓位因子:</strong> <span>${riskControlData['综合建议仓位因子']}</span></li>
-                `;
+                // 使用传统的字符串拼接方式以保证最佳兼容性
+                let riskControlHtml = '';
+                riskControlHtml += '<li><strong>决策日期:</strong> <span>' + riskControlData.决策日期 + '</span></li>';
+                riskControlHtml += '<li><strong>市场宽度得分:</strong> <span>' + riskControlData['市场宽度得分'] + '</span></li>';
+                riskControlHtml += '<li><strong>资金流得分:</strong> <span>' + riskControlData['资金流得分'] + '</span></li>';
+                riskControlHtml += '<li><strong>持仓结构得分:</strong> <span>' + riskControlData['持仓结构得分'] + '</span></li>';
+                riskControlHtml += '<li><strong>综合建议仓位因子:</strong> <span>' + riskControlData['综合建议仓位因子'] + '</span></li>';
+                riskControlList.innerHTML = riskControlHtml;
             } else {
                 riskControlList.innerHTML = '<li><strong>风控信息:</strong> <span>暂无风控因子数据。</span></li>';
             }
-            // --- **** /新增 **** ---
+            // --- **** /修正 **** ---
         });
     </script>
 </body>
