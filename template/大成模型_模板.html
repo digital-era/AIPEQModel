@@ -502,23 +502,4 @@
         }
     </script>
 </body>
-</html>```
-
-**修改说明：**
-
-1.  **HTML结构新增:**
-    *   在目录（`#table-of-contents`）中新增了一个指向“风控因子分析”的链接。
-    *   在报告主体部分新增了一个`<section id="section-risk-control" class="risk-control-factors">`来展示风控信息。
-    *   在这个新的section中，包含一个`<h2>`标题和一个`<ul>`列表(`id="risk-control-list"`)，用于存放风控的各个指标。
-
-2.  **CSS样式新增:**
-    *   添加了`.risk-control-factors`类，为风控分析区域提供了独立的样式，使其与报告的其他部分风格协调。
-
-3.  **JavaScript逻辑修改 (新增部分):**
-    *   在`renderReport`函数中，新增了一个部分来处理风控因子信息：
-        *   获取`risk-control-list`元素。
-        *   从`jsonData.结果.风控因子信息`中提取数据。
-        *   构建HTML字符串，将“决策日期”、“市场宽度得分”、“资金流得分”、“持仓结构得分”、“综合建议仓位因子”等信息以列表项（`<li>`）的形式呈现。
-        *   如果风控数据不存在，则显示“暂无风控因子数据”。
-
-现在，您的HTML模板在解析JSON数据时，会自动提取并展示“风控因子信息”部分的内容。
+</html>
