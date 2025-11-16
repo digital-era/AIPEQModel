@@ -342,7 +342,6 @@
                 <li><a href="#section-disclaimer">声明与提示</a></li>
                 <li><a href="#section-optimal-portfolio">最优投资组合配置</a></li>
                 <li><a href="#section-performance">组合预期历史表现</a></li>
-                <!-- **** 新增：风控因子分析目录链接 **** -->
                 <li><a href="#section-risk-control">风控因子分析</a></li>
             </ul>
         </nav>
@@ -390,14 +389,13 @@
             </div>
         </section>
         
-        <!-- **** 新增：风控因子分析区域 **** -->
+        <!-- 风控因子分析区域 -->
         <section id="section-risk-control" class="risk-control-factors">
             <h2><a href="#section-risk-control" style="text-decoration: none; color: inherit;">风控因子分析</a></h2>
             <ul id="risk-control-list">
                 <!-- JS会在这里填充风控因子 -->
             </ul>
         </section>
-        <!-- **** /新增 **** -->
 
         <footer style="text-align: center; margin-top: 50px; font-size: 0.85em; color: #6c757d; border-top: 1px solid #e0e0e0; padding-top: 20px;">
             <p>&copy; 2025 大智模型. 所有权利保留. <span id="footer-date"></span></p>
@@ -406,92 +404,101 @@
 
     <script>
         // --- 1. 定义您的JSON数据变量 ---
-        // 当有新的报告数据时，只需替换以下jsonData变量的内容
         var jsonData =  __JSON_DATA_PLACEHOLDER__;
         
-        // --- 2. DOMContentLoaded确保HTML元素加载完毕后再执行JS ---
+        // --- 2. 确保HTML元素加载完毕后再执行JS ---
         document.addEventListener('DOMContentLoaded', function() {
-            const data = jsonData; // 使用预定义的JSON数据变量
+            try {
+                const data = jsonData; // 使用预定义的JSON数据变量
 
-            // --- 3. 提取并填充通用信息 ---
-            const reportDateElement = document.getElementById('report-date');
-            const statusBadgeElement = document.getElementById('status-badge');
-            const disclaimerPreElement = document.getElementById('disclaimer-pre');
-            const footerDateElement = document.getElementById('footer-date');
-            const pageTitleElement = document.getElementById('report-page-title');
+                // --- 3. 提取并填充通用信息 ---
+                const reportDateElement = document.getElementById('report-date');
+                const statusBadgeElement = document.getElementById('status-badge');
+                const disclaimerPreElement = document.getElementById('disclaimer-pre');
+                const footerDateElement = document.getElementById('footer-date');
+                const pageTitleElement = document.getElementById('report-page-title');
 
-            const firstStockDate = data.结果.最优投资组合配置.配置详情.最后一日日期;
-            const [year, month, day] = firstStockDate.split('-'); // 将 "2025-09-17" 分割成 ['2025', '09', '17']
-            const formattedReportDate = `${year}年${month}月${day}日`; // 使用模板字符串优雅地拼接
-
-            pageTitleElement.textContent = `大智模型组合收益分析报告 - ${firstStockDate}`; // 更新页面标题
-            reportDateElement.textContent = `报告日期: ${formattedReportDate}`;
-            statusBadgeElement.textContent = `运行状态: ${data.运行状态}`;
-            disclaimerPreElement.textContent = data.声明与提示;
-            footerDateElement.textContent = `报告生成于 ${formattedReportDate}.`;
-
-            // --- 4. 生成“最优投资组合配置”表格的行数据 ---
-            const portfolioTableBody = document.getElementById('portfolio-table-body');
-            let portfolioRowsHtml = "";
-            data.结果.最优投资组合配置.配置详情.forEach(item => {
-                const lastPrice = item['最近一日价格'] !== null ? item['最近一日价格'].toFixed(2) : 'N/A';
-                const potScore = item['PotScore'] !== null && typeof item['PotScore'] === 'number' ? item['PotScore'].toFixed(2) : item['PotScore'];
+                // **** 修正点：从数组的第一个元素 [0] 获取日期 ****
+                const firstStockDate = data.结果.最优投资组合配置.配置详情[0].最后一日日期;
                 
-                let changeClass = "price-change-neutral";
-                try {
-                    const changeValue = parseFloat(item['涨跌幅(%)'].replace('%', ''));
-                    if (changeValue > 0) {
-                        changeClass = "price-change-positive";
-                    } else if (changeValue < 0) {
-                        changeClass = "price-change-negative";
-                    }
-                } catch (e) {}
+                const [year, month, day] = firstStockDate.split('-');
+                const formattedReportDate = `${year}年${month}月${day}日`;
 
-                portfolioRowsHtml += `
-                    <tr>
-                        <td>${item.代码}</td>
-                        <td>${item.名称}</td>
-                        <td class="weight-column">${item['最优权重(%)']}</td>
-                        <td>${lastPrice}</td>
-                        <td class="${changeClass}">${item['涨跌幅(%)']}</td>
-                        <td>${potScore}</td>
-                        <td>${item['总净流入占比_5日总和(%)']}</td>
-                        <td>${item['主力净流入-净占比(%)']}</td>
-                    </tr>`;
-            });
-            portfolioTableBody.innerHTML = portfolioRowsHtml;
+                pageTitleElement.textContent = `大智模型组合收益分析报告 - ${firstStockDate}`;
+                reportDateElement.textContent = `报告日期: ${formattedReportDate}`;
+                statusBadgeElement.textContent = `运行状态: ${data.运行状态}`;
+                disclaimerPreElement.textContent = data.声明与提示;
+                footerDateElement.textContent = `报告生成于 ${formattedReportDate}.`;
 
-            // --- 5. 提取并填充“组合预期历史表现”数据 ---
-            const performanceMetricsList = document.getElementById('performance-metrics-list');
-            const performanceDataRaw = data.结果.组合预期历史表现.raw_data;
+                // --- 4. 生成“最优投资组合配置”表格的行数据 ---
+                const portfolioTableBody = document.getElementById('portfolio-table-body');
+                let portfolioRowsHtml = "";
+                data.结果.最优投资组合配置.配置详情.forEach(item => {
+                    const lastPrice = item['最近一日价格'] !== null ? item['最近一日价格'].toFixed(2) : 'N/A';
+                    const potScore = item['PotScore'] !== null && typeof item['PotScore'] === 'number' ? item['PotScore'].toFixed(2) : item['PotScore'];
+                    
+                    let changeClass = "price-change-neutral";
+                    try {
+                        const changeValue = parseFloat(item['涨跌幅(%)'].replace('%', ''));
+                        if (changeValue > 0) {
+                            changeClass = "price-change-positive";
+                        } else if (changeValue < 0) {
+                            changeClass = "price-change-negative";
+                        }
+                    } catch (e) {}
 
-            const annualReturn = (performanceDataRaw['预期年化收益率'] * 100).toFixed(2) + '%';
-            const annualVolatility = (performanceDataRaw['年化波动率(风险)'] * 100).toFixed(2) + '%';
-            const sharpeRatio = performanceDataRaw['预期夏普比率'].toFixed(2); 
+                    // 使用传统的字符串拼接以避免潜在的兼容性问题
+                    portfolioRowsHtml += '<tr>' +
+                                            '<td>' + item.代码 + '</td>' +
+                                            '<td>' + item.名称 + '</td>' +
+                                            '<td class="weight-column">' + item['最优权重(%)'] + '</td>' +
+                                            '<td>' + lastPrice + '</td>' +
+                                            '<td class="' + changeClass + '">' + item['涨跌幅(%)'] + '</td>' +
+                                            '<td>' + potScore + '</td>' +
+                                            '<td>' + item['总净流入占比_5日总和(%)'] + '</td>' +
+                                            '<td>' + item['主力净流入-净占比(%)'] + '</td>' +
+                                        '</tr>';
+                });
+                portfolioTableBody.innerHTML = portfolioRowsHtml;
 
-            performanceMetricsList.innerHTML = `
-                <li><strong>预期年化收益率:</strong> <span>${annualReturn}</span></li>
-                <li><strong>年化波动率 (风险):</strong> <span>${annualVolatility}</span></li>
-                <li><strong>预期夏普比率:</strong> <span>${sharpeRatio}</span></li>
-            `;
+                // --- 5. 提取并填充“组合预期历史表现”数据 ---
+                const performanceMetricsList = document.getElementById('performance-metrics-list');
+                const performanceDataRaw = data.结果.组合预期历史表现.raw_data;
 
-            // --- **** 6. 修正：提取并填充“风控因子分析”数据 **** ---
-            const riskControlList = document.getElementById('risk-control-list');
-            const riskControlData = data.结果.风控因子信息;
+                const annualReturn = (performanceDataRaw['预期年化收益率'] * 100).toFixed(2) + '%';
+                const annualVolatility = (performanceDataRaw['年化波动率(风险)'] * 100).toFixed(2) + '%';
+                const sharpeRatio = performanceDataRaw['预期夏普比率'].toFixed(2); 
+                
+                // 使用传统的字符串拼接
+                performanceMetricsList.innerHTML = '<li><strong>预期年化收益率:</strong> <span>' + annualReturn + '</span></li>' +
+                                                   '<li><strong>年化波动率 (风险):</strong> <span>' + annualVolatility + '</span></li>' +
+                                                   '<li><strong>预期夏普比率:</strong> <span>' + sharpeRatio + '</span></li>';
 
-            if (riskControlData) { // 检查风控数据是否存在
-                // 使用传统的字符串拼接方式以保证最佳兼容性
-                let riskControlHtml = '';
-                riskControlHtml += '<li><strong>决策日期:</strong> <span>' + riskControlData.决策日期 + '</span></li>';
-                riskControlHtml += '<li><strong>市场宽度得分:</strong> <span>' + riskControlData['市场宽度得分'] + '</span></li>';
-                riskControlHtml += '<li><strong>资金流得分:</strong> <span>' + riskControlData['资金流得分'] + '</span></li>';
-                riskControlHtml += '<li><strong>持仓结构得分:</strong> <span>' + riskControlData['持仓结构得分'] + '</span></li>';
-                riskControlHtml += '<li><strong>综合建议仓位因子:</strong> <span>' + riskControlData['综合建议仓位因子'] + '</span></li>';
-                riskControlList.innerHTML = riskControlHtml;
-            } else {
-                riskControlList.innerHTML = '<li><strong>风控信息:</strong> <span>暂无风控因子数据。</span></li>';
+                // --- 6. 提取并填充“风控因子分析”数据 ---
+                const riskControlList = document.getElementById('risk-control-list');
+                const riskControlData = data.结果.风控因子信息;
+
+                if (riskControlData) {
+                    // 使用传统的字符串拼接方式以保证最佳兼容性
+                    let riskControlHtml = '';
+                    riskControlHtml += '<li><strong>决策日期:</strong> <span>' + riskControlData.决策日期 + '</span></li>';
+                    riskControlHtml += '<li><strong>市场宽度得分:</strong> <span>' + riskControlData['市场宽度得分'] + '</span></li>';
+                    riskControlHtml += '<li><strong>资金流得分:</strong> <span>' + riskControlData['资金流得分'] + '</span></li>';
+                    riskControlHtml += '<li><strong>持仓结构得分:</strong> <span>' + riskControlData['持仓结构得分'] + '</span></li>';
+                    riskControlHtml += '<li><strong>综合建议仓位因子:</strong> <span>' + riskControlData['综合建议仓位因子'] + '</span></li>';
+                    riskControlList.innerHTML = riskControlHtml;
+                } else {
+                    riskControlList.innerHTML = '<li><strong>风控信息:</strong> <span>暂无风控因子数据。</span></li>';
+                }
+            } catch (error) {
+                // 如果执行代码出现任何错误，会在页面上显示错误信息，方便调试
+                document.body.innerHTML = '<div style="padding: 20px; font-family: monospace; color: red;">' +
+                                          '<h1>脚本执行出错</h1>' +
+                                          '<p>错误名称: ' + error.name + '</p>' +
+                                          '<p>错误信息: ' + error.message + '</p>' +
+                                          '<p>请检查JSON数据结构和脚本逻辑。</p>' +
+                                          '</div>';
             }
-            // --- **** /修正 **** ---
         });
     </script>
 </body>
