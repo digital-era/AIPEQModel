@@ -485,6 +485,12 @@
                     riskControlHtml += '<li><strong>市场宽度得分:</strong> <span>' + riskControlData['市场宽度得分'] + '</span></li>';
                     riskControlHtml += '<li><strong>资金流得分:</strong> <span>' + riskControlData['资金流得分'] + '</span></li>';
                     riskControlHtml += '<li><strong>持仓结构得分:</strong> <span>' + riskControlData['持仓结构得分'] + '</span></li>';
+                    
+                    // >>> 修改处：解析并显示市场氛围系数 <<<
+                    if (riskControlData['市场氛围系数']) {
+                        riskControlHtml += '<li><strong>市场氛围系数:</strong> <span>' + riskControlData['市场氛围系数'] + '</span></li>';
+                    }
+                    
                     riskControlHtml += '<li><strong>综合建议仓位因子:</strong> <span>' + riskControlData['综合建议仓位因子'] + '</span></li>';
                     riskControlList.innerHTML = riskControlHtml;
                 } else {
