@@ -466,32 +466,72 @@
                 // --- 5. 提取并填充“组合预期历史表现”数据 ---
                 var performanceMetricsList = document.getElementById('performance-metrics-list');
                 var performanceDataRaw = data.结果.组合预期历史表现.raw_data;
-    
-                var annualReturn = (performanceDataRaw['预期年化收益率'] * 100).toFixed(2) + '%';
-                var annualVolatility = (performanceDataRaw['年化波动率(风险)'] * 100).toFixed(2) + '%';
-                var sharpeRatio = performanceDataRaw['预期夏普比率'].toFixed(2); 
+                
+                // 处理可能的数值或字符串 (稳健性处理)
+                var annualReturn = performanceDataRaw['预期年化收益率'];
+                if (typeof annualReturn === 'number') {
+                    annualReturn = (annualReturn * 100).toFixed(2) + '%';
+                }
+                
+                var annualVolatility = performanceDataRaw['年化波动率(风险)'];
+                if (typeof annualVolatility === 'number') {
+                    annualVolatility = (annualVolatility * 100).toFixed(2) + '%';
+                } else if (typeof annualVolatility === 'string' && annualVolatility.indexOf('%') === -1 && !isNaN(parseFloat(annualVolatility))) {
+                     annualVolatility = (parseFloat(annualVolatility) * 100).toFixed(2) + '%';
+                }
+
+                var sharpeRatio = performanceDataRaw['预期夏普比率'];
+                if (typeof sharpeRatio === 'number') {
+                    sharpeRatio = sharpeRatio.toFixed(2);
+                }
     
                 performanceMetricsList.innerHTML = '<li><strong>预期年化收益率:</strong> <span>' + annualReturn + '</span></li>' +
                                                    '<li><strong>年化波动率 (风险):</strong> <span>' + annualVolatility + '</span></li>' +
                                                    '<li><strong>预期夏普比率:</strong> <span>' + sharpeRatio + '</span></li>';
 
-                // --- **** 6. 新增：提取并填充“风控因子分析”数据 **** ---
+                // --- **** 6. 新增：提取并填充“风控因子分析”数据 (兼容新旧结构) **** ---
                 var riskControlList = document.getElementById('risk-control-list');
                 var riskControlData = data.结果.风控因子信息;
 
-                if (riskControlData) { // 确保风控数据存在
+                if (riskControlData) { 
                     var riskControlHtml = '';
-                    riskControlHtml += '<li><strong>决策日期:</strong> <span>' + riskControlData.决策日期 + '</span></li>';
-                    riskControlHtml += '<li><strong>市场宽度得分:</strong> <span>' + riskControlData['市场宽度得分'] + '</span></li>';
-                    riskControlHtml += '<li><strong>资金流得分:</strong> <span>' + riskControlData['资金流得分'] + '</span></li>';
-                    riskControlHtml += '<li><strong>持仓结构得分:</strong> <span>' + riskControlData['持仓结构得分'] + '</span></li>';
                     
-                    // >>> 修改处：解析并显示市场氛围系数 <<<
-                    if (riskControlData['市场氛围系数']) {
-                        riskControlHtml += '<li><strong>市场氛围系数:</strong> <span>' + riskControlData['市场氛围系数'] + '</span></li>';
+                    // 1. 基础信息
+                    if (riskControlData.决策日期) {
+                        riskControlHtml += '<li><strong>决策日期:</strong> <span>' + riskControlData.决策日期 + '</span></li>';
+                    }
+
+                    // 2. 判断并渲染不同的字段 (大成模型 vs 低波稳健模型)
+                    
+                    // (A) 低波稳健模型特有字段
+                    if (riskControlData['市场氛围系数(宽度)']) {
+                        // 兼容旧的键名 '市场氛围系数(宽度)' 
+                         riskControlHtml += '<li><strong>市场氛围系数:</strong> <span>' + riskControlData['市场氛围系数(宽度)'] + '</span></li>';
+                    } else if (riskControlData['市场氛围系数']) {
+                        // 新的键名 '市场氛围系数'
+                         riskControlHtml += '<li><strong>市场氛围系数:</strong> <span>' + riskControlData['市场氛围系数'] + '</span></li>';
+                    }
+
+                    if (riskControlData['隔夜宏观系数(UDI)']) {
+                        riskControlHtml += '<li><strong>隔夜宏观系数(UDI):</strong> <span>' + riskControlData['隔夜宏观系数(UDI)'] + '</span></li>';
+                    }
+
+                    // (B) 大成模型字段 (如果有的话，也显示出来)
+                    if (riskControlData['市场宽度得分']) {
+                        riskControlHtml += '<li><strong>市场宽度得分:</strong> <span>' + riskControlData['市场宽度得分'] + '</span></li>';
+                    }
+                    if (riskControlData['资金流得分']) {
+                        riskControlHtml += '<li><strong>资金流得分:</strong> <span>' + riskControlData['资金流得分'] + '</span></li>';
+                    }
+                    if (riskControlData['持仓结构得分']) {
+                        riskControlHtml += '<li><strong>持仓结构得分:</strong> <span>' + riskControlData['持仓结构得分'] + '</span></li>';
+                    }
+
+                    // 3. 最终建议仓位 (所有模型通用)
+                    if (riskControlData['综合建议仓位因子']) {
+                        riskControlHtml += '<li><strong>综合建议仓位因子:</strong> <span>' + riskControlData['综合建议仓位因子'] + '</span></li>';
                     }
                     
-                    riskControlHtml += '<li><strong>综合建议仓位因子:</strong> <span>' + riskControlData['综合建议仓位因子'] + '</span></li>';
                     riskControlList.innerHTML = riskControlHtml;
                 } else {
                     riskControlList.innerHTML = '<li><strong>风控信息:</strong> <span>暂无风控因子数据。</span></li>';
