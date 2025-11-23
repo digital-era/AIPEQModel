@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="report-page-title">低波稳健模型组合配置报告</title>
+    <style>
+        /* 全局样式 */
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            box-sizing: border-box; /* 确保内边距和边框包含在元素总宽度和高度内 */
+        }
+
+        /* 头部 */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+            border-bottom: 2px solid #eceff1;
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            color: #34495e;
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-left: 5px solid #3498db;
+            padding-left: 10px;
+        }
+
+        h3 {
+            color: #34495e;
+            font-size: 1.4em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        /* 目录 */
+        #table-of-contents {
+            background-color: #e9f5f9;
+            border-radius: 6px;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            border: 1px solid #d0edf7;
+        }
+
+        #table-of-contents h2 {
+            margin-top: 0;
+            padding-left: 0;
+            border-left: none;
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        #table-of-contents ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #table-of-contents li {
+            margin-bottom: 8px;
+        }
+
+        #table-of-contents a {
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        #table-of-contents a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        /* 声明与提示 */
+        details {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            border-radius: 6px;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            color: #856404;
+        }
+
+        summary {
+            font-weight: bold;
+            cursor: pointer;
+            outline: none;
+            color: #6a4b00;
+        }
+
+        details p {
+            margin-top: 15px;
+            margin-bottom: 0;
+        }
+
+        details pre {
+            white-space: pre-wrap; /* 允许文本在必要时换行 */
+            word-wrap: break-word; /* 允许长单词在必要时换行 */
+            margin-top: 10px;
+            background-color: #ffeefa;
+            border-radius: 4px;
+            padding: 10px;
+            font-size: 0.9em;
+            border: 1px dashed #ffe59c;
+        }
+
+        /* 运行状态 */
+        .status-badge {
+            display: inline-block;
+            background-color: #28a745;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+            border-radius: 6px;
+            overflow: hidden; /* 确保圆角效果 */
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+            white-space: nowrap; /* 防止表头换行 */
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f8f8;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* 特殊列样式 */
+        .weight-column {
+            font-weight: bold;
+            color: #2980b9;
+        }
+
+        .price-change-positive {
+            color: #28a745; /* 绿色 */
+            font-weight: bold;
+        }
+
+        .price-change-negative {
+            color: #dc3545; /* 红色 */
+            font-weight: bold;
+        }
+
+        .price-change-neutral {
+            color: #6c757d; /* 灰色 */
+        }
+        
+        /* 组合预期历史表现 (修改后) */
+        .performance-metrics {
+            margin-top: 20px;
+            background-color: #e9f5f9; /* 浅蓝色背景 (与目录背景色一致) */
+            border: 1px solid #d0edf7;   /* 稍深的蓝色边框 (与目录边框色一致) */
+            border-radius: 6px;
+            padding: 20px;
+        }
+        
+        .performance-metrics ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .performance-metrics li {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            color: #2980b9; /* 结果值的蓝色字体 (比标签稍亮) */
+        }
+        
+        .performance-metrics li strong {
+            color: #34495e; /* 标签的深蓝灰色字体 (与h2/h3标题颜色一致) */
+            min-width: 120px;
+            display: inline-block;
+        }
+
+        /* 风控因子分析样式 */
+        .risk-control-factors {
+            margin-top: 30px;
+            background-color: #fefefe; /* 浅白色背景 */
+            border: 1px solid #e0e0e0;   /* 灰色边框 */
+            border-radius: 6px;
+            padding: 20px;
+        }
+
+        .risk-control-factors h2 {
+            margin-top: 0;
+            padding-left: 0;
+            border-left: none;
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .risk-control-factors ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .risk-control-factors li {
+            margin-bottom: 12px;
+            font-size: 1.05em;
+            color: #34495e; /* 标签和值的颜色 */
+        }
+
+        .risk-control-factors li strong {
+            color: #3498db; /* 标签突出显示为蓝色 */
+            min-width: 180px; /* 确保标签对齐 */
+            display: inline-block;
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 15px;
+                border-radius: 0; /* 移动端可以取消圆角 */
+                box-shadow: none; /* 移动端可以取消阴影 */
+            }
+
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 20px;
+            }
+
+            h2 {
+                font-size: 1.5em;
+                margin-top: 30px;
+                margin-bottom: 15px;
+            }
+
+            h3 {
+                font-size: 1.2em;
+                margin-top: 20px;
+                margin-bottom: 10px;
+            }
+
+            #table-of-contents {
+                padding: 10px 15px;
+                margin-bottom: 20px;
+            }
+
+            details {
+                padding: 10px 15px;
+                margin-bottom: 20px;
+            }
+
+            /* 使表格在小屏幕上可水平滚动 */
+            .table-responsive {
+                width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch; /* iOS 平滑滚动 */
+            }
+
+            table {
+                min-width: 800px; /* 确保表格内容不会过于拥挤 */
+            }
+
+            th, td {
+                padding: 8px 10px;
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5em;
+            }
+
+            h2 {
+                font-size: 1.3em;
+            }
+
+            th, td {
+                padding: 6px 8px;
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>低波稳健模型组合配置报告</h1>
+        <p id="report-date" style="text-align: center; color: #6c757d; font-size: 0.95em;"></p>
+        <div style="text-align: center; margin-bottom: 20px;">
+            <span id="status-badge" class="status-badge"></span>
+        </div>
+
+        <!-- 目录 -->
+        <nav id="table-of-contents">
+            <h2>目录</h2>
+            <ul>
+                <li><a href="#section-disclaimer">声明与提示</a></li>
+                <li><a href="#section-optimal-portfolio">最优投资组合配置</a></li>
+                <li><a href="#section-performance">组合预期历史表现</a></li>
+                <li><a href="#section-risk-control">风控因子分析</a></li> <!-- 添加风控因子到目录 -->
+            </ul>
+        </nav>
+
+        <!-- 声明与提示 -->
+        <section id="section-disclaimer">
+            <h2><a href="#section-disclaimer" style="text-decoration: none; color: inherit;">声明与提示</a></h2>
+            <details>
+                <summary>点击展开/收起 重要的声明与风险提示</summary>
+                <pre id="disclaimer-pre"></pre>
+            </details>
+        </section>
+
+        <!-- 最优投资组合配置 -->
+        <section id="section-optimal-portfolio">
+            <h2><a href="#section-optimal-portfolio" style="text-decoration: none; color: inherit;">最优投资组合配置 (最大化夏普比率)</a></h2>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>代码</th>
+                            <th>名称</th>
+                            <th>最优权重(%)</th>
+                            <th>最近一日价格</th>
+                            <th>涨跌幅(%)</th>
+                            <th>PotScore</th>
+                            <th>总净流入占比_5日总和(%)</th>
+                            <th>主力净流入-净占比(%)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="portfolio-table-body">
+                        <!-- JS会在这里填充表格行 -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 组合预期历史表现 -->
+        <section id="section-performance">
+            <h2><a href="#section-performance" style="text-decoration: none; color: inherit;">该组合的预期历史表现</a></h2>
+            <div class="performance-metrics">
+                <ul id="performance-metrics-list">
+                    <!-- JS会在这里填充性能指标 -->
+                </ul>
+            </div>
+        </section>
+
+        <!-- **** 新增：风控因子分析区域 **** -->
+        <section id="section-risk-control" class="risk-control-factors">
+            <h2><a href="#section-risk-control" style="text-decoration: none; color: inherit;">风控因子分析</a></h2>
+            <ul id="risk-control-list">
+                <!-- JS会在这里填充风控因子 -->
+            </ul>
+        </section>
+        <!-- **** /新增 **** -->
+
+        <footer style="text-align: center; margin-top: 50px; font-size: 0.85em; color: #6c757d; border-top: 1px solid #e0e0e0; padding-top: 20px;">
+            <p>&copy; 2025 低波稳健模型. 所有权利保留. <span id="footer-date"></span></p>
+        </footer>
+    </div>
+
+    <!-- **** 关键修改：将SCRIPT标签移动到body结束前 **** -->
+    <script>
+        try {
+            // --- 1. 定义您的JSON数据变量 ---
+            var jsonData =  __JSON_DATA_PLACEHOLDER__;
+
+            // --- 2. 直接执行渲染函数 ---
+            // (因为脚本在页面底部，DOM元素此时必定已加载完成)
+            function renderReport() {
+                var data = jsonData;
+    
+                // --- 3. 提取并填充通用信息 ---
+                var reportDateElement = document.getElementById('report-date');
+                var statusBadgeElement = document.getElementById('status-badge');
+                var disclaimerPreElement = document.getElementById('disclaimer-pre');
+                var footerDateElement = document.getElementById('footer-date');
+                var pageTitleElement = document.getElementById('report-page-title');
+    
+                var firstStockDate = data.结果.最优投资组合配置.配置详情[0].最后一日日期;
+                var dateParts = firstStockDate.split('-');
+                var year = dateParts[0];
+                var month = dateParts[1];
+                var day = dateParts[2];
+                var formattedReportDate = year + '年' + month + '月' + day + '日';
+    
+                pageTitleElement.textContent = '低波稳健模型组合配置报告 - ' + firstStockDate;
+                reportDateElement.textContent = '报告日期: ' + formattedReportDate;
+                statusBadgeElement.textContent = '运行状态: ' + data.运行状态;
+                disclaimerPreElement.textContent = data.声明与提示;
+                footerDateElement.textContent = '报告生成于 ' + formattedReportDate + '.';
+    
+                // --- 4. 生成“最优投资组合配置”表格的行数据 ---
+                var portfolioTableBody = document.getElementById('portfolio-table-body');
+                var portfolioRowsHtml = "";
+                data.结果.最优投资组合配置.配置详情.forEach(function(item) {
+                    var lastPrice = item['最近一日价格'].toFixed(2);
+                    var potScore = item['PotScore'] !== null && typeof item['PotScore'] === 'number' ? item['PotScore'].toFixed(2) : item['PotScore'];
+                    
+                    var changeClass = "price-change-neutral";
+                    try {
+                        var changeValue = parseFloat(item['涨跌幅(%)'].replace('%', ''));
+                        if (changeValue > 0) {
+                            changeClass = "price-change-positive";
+                        } else if (changeValue < 0) {
+                            changeClass = "price-change-negative";
+                        }
+                    } catch (e) {}
+    
+                    portfolioRowsHtml += '<tr>' +
+                                            '<td>' + item.代码 + '</td>' +
+                                            '<td>' + item.名称 + '</td>' +
+                                            '<td class="weight-column">' + item['最优权重(%)'] + '</td>' +
+                                            '<td>' + lastPrice + '</td>' +
+                                            '<td class="' + changeClass + '">' + item['涨跌幅(%)'] + '</td>' +
+                                            '<td>' + potScore + '</td>' +
+                                            '<td>' + item['总净流入占比_5日总和(%)'] + '</td>' +
+                                            '<td>' + item['主力净流入-净占比(%)'] + '</td>' +
+                                        '</tr>';
+                });
+                portfolioTableBody.innerHTML = portfolioRowsHtml;
+    
+                // --- 5. 提取并填充“组合预期历史表现”数据 ---
+                var performanceMetricsList = document.getElementById('performance-metrics-list');
+                var performanceDataRaw = data.结果.组合预期历史表现.raw_data;
+                
+                // 处理可能的数值或字符串 (稳健性处理)
+                var annualReturn = performanceDataRaw['预期年化收益率'];
+                if (typeof annualReturn === 'number') {
+                    annualReturn = (annualReturn * 100).toFixed(2) + '%';
+                }
+                
+                var annualVolatility = performanceDataRaw['年化波动率(风险)'];
+                if (typeof annualVolatility === 'number') {
+                    annualVolatility = (annualVolatility * 100).toFixed(2) + '%';
+                } else if (typeof annualVolatility === 'string' && annualVolatility.indexOf('%') === -1 && !isNaN(parseFloat(annualVolatility))) {
+                     annualVolatility = (parseFloat(annualVolatility) * 100).toFixed(2) + '%';
+                }
+
+                var sharpeRatio = performanceDataRaw['预期夏普比率'];
+                if (typeof sharpeRatio === 'number') {
+                    sharpeRatio = sharpeRatio.toFixed(2);
+                }
+    
+                performanceMetricsList.innerHTML = '<li><strong>预期年化收益率:</strong> <span>' + annualReturn + '</span></li>' +
+                                                   '<li><strong>年化波动率 (风险):</strong> <span>' + annualVolatility + '</span></li>' +
+                                                   '<li><strong>预期夏普比率:</strong> <span>' + sharpeRatio + '</span></li>';
+
+                // --- **** 6. 新增：提取并填充“风控因子分析”数据 (兼容新旧结构) **** ---
+                var riskControlList = document.getElementById('risk-control-list');
+                var riskControlData = data.结果.风控因子信息;
+
+                if (riskControlData) { 
+                    var riskControlHtml = '';
+                    
+                    // 1. 基础信息
+                    if (riskControlData.决策日期) {
+                        riskControlHtml += '<li><strong>决策日期:</strong> <span>' + riskControlData.决策日期 + '</span></li>';
+                    }
+
+                    // 2. 判断并渲染不同的字段 (大成模型 vs 低波稳健模型)
+                    
+                    // (A) 低波稳健模型特有字段
+                    if (riskControlData['市场氛围系数(宽度)']) {
+                        // 兼容旧的键名 '市场氛围系数(宽度)' 
+                         riskControlHtml += '<li><strong>市场氛围系数:</strong> <span>' + riskControlData['市场氛围系数(宽度)'] + '</span></li>';
+                    } else if (riskControlData['市场氛围系数']) {
+                        // 新的键名 '市场氛围系数'
+                         riskControlHtml += '<li><strong>市场氛围系数:</strong> <span>' + riskControlData['市场氛围系数'] + '</span></li>';
+                    }
+
+                    if (riskControlData['隔夜宏观系数(UDI)']) {
+                        riskControlHtml += '<li><strong>隔夜宏观系数(UDI):</strong> <span>' + riskControlData['隔夜宏观系数(UDI)'] + '</span></li>';
+                    }
+
+                    // (B) 大成模型字段 (如果有的话，也显示出来)
+                    if (riskControlData['市场宽度得分']) {
+                        riskControlHtml += '<li><strong>市场宽度得分:</strong> <span>' + riskControlData['市场宽度得分'] + '</span></li>';
+                    }
+                    if (riskControlData['资金流得分']) {
+                        riskControlHtml += '<li><strong>资金流得分:</strong> <span>' + riskControlData['资金流得分'] + '</span></li>';
+                    }
+                    if (riskControlData['持仓结构得分']) {
+                        riskControlHtml += '<li><strong>持仓结构得分:</strong> <span>' + riskControlData['持仓结构得分'] + '</span></li>';
+                    }
+
+                    // 3. 最终建议仓位 (所有模型通用)
+                    if (riskControlData['综合建议仓位因子']) {
+                        riskControlHtml += '<li><strong>综合建议仓位因子:</strong> <span>' + riskControlData['综合建议仓位因子'] + '</span></li>';
+                    }
+                    
+                    riskControlList.innerHTML = riskControlHtml;
+                } else {
+                    riskControlList.innerHTML = '<li><strong>风控信息:</strong> <span>暂无风控因子数据。</span></li>';
+                }
+                // --- **** /新增 **** ---
+            }
+
+            // 调用渲染函数
+            renderReport();
+
+        } catch (error) {
+            // 如果在手机上执行代码出现任何错误，会弹出一个窗口显示错误信息
+            alert('脚本执行出错: ' + error.name + ' - ' + error.message);
+        }
+    </script>
+</body>
+</html>
