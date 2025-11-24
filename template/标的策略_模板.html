@@ -366,7 +366,6 @@
         document.querySelectorAll('nav#toc a').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
@@ -375,6 +374,8 @@
 
         // Function to parse the raw report strings into structured data
         function parseStockReport(reportStr) {
+            if (!reportStr || reportStr === '无') return null; // 【新增】快速过滤无效数据
+
             const lines = reportStr.split('\n').map(line => line.trim()).filter(line => line !== '');
             const report = {};
 
@@ -393,29 +394,38 @@
             if (trendAnalysisStart !== -1) {
                 report.trend_analysis = {};
                 const conclusionLine = lines[trendAnalysisStart + 1];
+                
+                // 【修改】增强正则匹配的兼容性
                 let driversMatch = conclusionLine.match(/结论：近期走势主要由以下因子驱动: \['(.+?)'\]/);
                 if (driversMatch) {
                     report.trend_analysis.drivers = driversMatch[1].split("', '");
                 } else {
-                     // Fallback for cases where drivers are not in ['a', 'b'] format
                     const simpleDriversMatch = conclusionLine.match(/结论：近期走势主要由以下因子驱动: (\[.*?\])/);
                     try {
-                        if (simpleDriversMatch) report.trend_analysis.drivers = JSON.parse(simpleDriversMatch[1].replace(/'/g, '"'));
+                        if (simpleDriversMatch) {
+                            // 尝试将单引号替换为双引号以符合JSON标准
+                            let jsonStr = simpleDriversMatch[1].replace(/'/g, '"');
+                            report.trend_analysis.drivers = JSON.parse(jsonStr);
+                        } else {
+                             report.trend_analysis.drivers = [];
+                        }
                     } catch (e) {
+                         // 最后的兜底：简单的字符串分割
                          report.trend_analysis.drivers = simpleDriversMatch ? simpleDriversMatch[1].replace(/\[|\]|'/g, '').split(', ').filter(Boolean) : [];
                     }
                 }
 
-
                 const factorsLine = lines[trendAnalysisStart + 2];
-                const factorsRaw = factorsLine.substring(factorsLine.indexOf(':') + 1).trim();
-                report.trend_analysis.factor_values = {};
-                factorsRaw.split(', ').forEach(item => {
-                    const [key, value] = item.split(': ').map(s => s.trim());
-                    if (key && value) {
-                        report.trend_analysis.factor_values[key] = value;
-                    }
-                });
+                if (factorsLine) {
+                    const factorsRaw = factorsLine.substring(factorsLine.indexOf(':') + 1).trim();
+                    report.trend_analysis.factor_values = {};
+                    factorsRaw.split(', ').forEach(item => {
+                        const parts = item.split(': ');
+                        if (parts.length === 2) {
+                            report.trend_analysis.factor_values[parts[0].trim()] = parts[1].trim();
+                        }
+                    });
+                }
             }
 
             // Extract strategy A
@@ -442,6 +452,7 @@
         }
 
         function getSignalClass(signalText) {
+            if (!signalText) return "";
             if (signalText.includes("买入")) return "buy";
             if (signalText.includes("中性/持有")) return "neutral-hold";
             if (signalText.includes("中性/等待")) return "neutral-wait";
@@ -449,9 +460,9 @@
         }
 
         // --- Data Insertion Logic ---
-        // Embed the JSON data directly into the script
         var jsonData =  __JSON_DATA_PLACEHOLDER__;
         const data = jsonData; 
+        
         // Fill in header
         document.getElementById('model-name').textContent = data['模型名称'];
         document.getElementById('data-date').textContent = `数据截止日期: ${data['数据截止日期']}`;
@@ -460,33 +471,47 @@
         // Fill in summary
         document.getElementById('summary-paragraph-1').innerHTML = `本报告由 <strong>${data['模型名称']}</strong> 于 <strong>${data['数据截止日期']}</strong> 生成，旨在提供基于量化交易策略的标的筛选与操作建议。`;
 
-        // ########## START: MODIFIED CODE ##########
-        const buySignalCount = data['步骤2_交易策略分析']['买入信号标的报告'].length;
-        const holdObserveCount = data['步骤2_交易策略分析']['持有观察标的报告'].length;
+        // ★★★ 核心修复逻辑开始 ★★★
+        
+        // 1. 预处理数据：过滤掉 '无' 和空值
+        const rawBuyList = data['步骤2_交易策略分析']['买入信号标的报告'];
+        const rawHoldList = data['步骤2_交易策略分析']['持有观察标的报告'];
+
+        const validBuyList = Array.isArray(rawBuyList) ? rawBuyList.filter(item => item !== '无' && item.trim() !== '') : [];
+        const validHoldList = Array.isArray(rawHoldList) ? rawHoldList.filter(item => item !== '无' && item.trim() !== '') : [];
+
+        // 2. 使用过滤后的数组长度进行计数
+        const buySignalCount = validBuyList.length;
+        const holdObserveCount = validHoldList.length;
+
         document.getElementById('summary-paragraph-2').innerHTML = `报告共筛选出 <strong>${data['步骤1_强势趋势标的'].数量}</strong> 支强势趋势标的。通过进一步的交易策略分析，我们识别出了 <strong>${buySignalCount}</strong> 支存在明确“最大赔率买入”信号的标的，以及 <strong>${holdObserveCount}</strong> 支需要继续“中性/持有/等待”的观察标的。`;
         
-        // ★★★ 第2处修改：使用JS更新目录文本 ★★★
         document.getElementById('toc-buy-signals').textContent = `交易策略分析 - 买入信号 (${buySignalCount}支)`;
         document.getElementById('toc-hold-observe').textContent = `交易策略分析 - 持有观察 (${holdObserveCount}支)`;
-        // ########## END: MODIFIED CODE ##########
+        // ★★★ 核心修复逻辑结束 ★★★
 
         document.getElementById('toc-strong-trend-stocks').innerHTML = `强势趋势标的 (${data['步骤1_强势趋势标的'].数量}支)`;
-
 
         // Fill in Step 1 stocks
         const strongTrendStocksSection = document.getElementById('strong-trend-stocks');
         document.getElementById('strong-trend-description').textContent = `${data['步骤1_强势趋势标的'].说明} (共 ${data['步骤1_强势趋势标的'].数量} 支)`;
         const stockListUl = document.getElementById('strong-trend-list');
-        stockListUl.innerHTML = ''; // Clear existing placeholder
-        data['步骤1_强势趋势标的'].列表.forEach(stock => {
-            const li = document.createElement('li');
-            li.textContent = stock;
-            stockListUl.appendChild(li);
-        });
+        stockListUl.innerHTML = ''; 
+        if(data['步骤1_强势趋势标的'].列表 && data['步骤1_强势趋势标的'].列表.length > 0) {
+            data['步骤1_强势趋势标的'].列表.forEach(stock => {
+                const li = document.createElement('li');
+                li.textContent = stock;
+                stockListUl.appendChild(li);
+            });
+        } else {
+             stockListUl.innerHTML = '<li>暂无强势趋势标的</li>';
+        }
 
         // Helper to render report articles
         function renderReportArticles(reportsData, targetSectionId) {
             const targetSection = document.getElementById(targetSectionId);
+            
+            // 如果过滤后的数据为空，直接显示暂无
             if (!reportsData || reportsData.length === 0) {
                 targetSection.innerHTML += '<p>暂无相关标的。</p>';
                 return;
@@ -494,16 +519,23 @@
 
             reportsData.forEach(reportStr => {
                 const report = parseStockReport(reportStr);
+
+                // 【关键修复】检查 report 是否解析成功以及是否有关键数据
+                if (!report || !report.name || !report.trend_analysis) {
+                    console.warn('跳过解析失败的报告:', reportStr);
+                    return; // 跳过这一条，继续下一条，防止整个脚本崩溃
+                }
+
                 const article = document.createElement('article');
                 article.className = 'stock-report';
                 article.innerHTML = `
-                    <h4>${report.name} <span class="date">数据日期: ${report.date}</span></h4>
+                    <h4>${report.name} <span class="date">数据日期: ${report.date || '未知日期'}</span></h4>
 
                     <div class="analysis-section">
                         <h5>近期走势流形分析 (最近20个交易日)</h5>
-                        <p><strong>结论：</strong> 近期走势主要由以下因子驱动: <code>${report.trend_analysis.drivers.join(', ')}</code></p>
-                        <p><strong>因子数值 (${report.date}):</strong>
-                            ${Object.entries(report.trend_analysis.factor_values).map(([factor, value]) => `${factor}: <strong>${value}</strong>`).join(', ')}
+                        <p><strong>结论：</strong> 近期走势主要由以下因子驱动: <code>${(report.trend_analysis.drivers || []).join(', ')}</code></p>
+                        <p><strong>因子数值 (${report.date || '-'}):</strong>
+                            ${report.trend_analysis.factor_values ? Object.entries(report.trend_analysis.factor_values).map(([factor, value]) => `${factor}: <strong>${value}</strong>`).join(', ') : '暂无数据'}
                         </p>
                     </div>
 
@@ -511,13 +543,13 @@
                         <h5>量化操作建议</h5>
                         <div class="strategy-box strategy-A">
                             <h5>[策略A: 最高胜率 (均值回归)]</h5>
-                            <p>信号: <span class="signal ${report.strategy_A.signal_class}">${report.strategy_A.signal_text}</span></p>
-                            <p>理由: ${report.strategy_A.reason}</p>
+                            <p>信号: <span class="signal ${report.strategy_A?.signal_class || ''}">${report.strategy_A?.signal_text || '无信号'}</span></p>
+                            <p>理由: ${report.strategy_A?.reason || '无'}</p>
                         </div>
                         <div class="strategy-box strategy-B">
                             <h5>[策略B: 最大赔率 (趋势突破)]</h5>
-                            <p>信号: <span class="signal ${report.strategy_B.signal_class}">${report.strategy_B.signal_text}</span></p>
-                            <p>理由: ${report.strategy_B.reason}</p>
+                            <p>信号: <span class="signal ${report.strategy_B?.signal_class || ''}">${report.strategy_B?.signal_text || '无信号'}</span></p>
+                            <p>理由: ${report.strategy_B?.reason || '无'}</p>
                         </div>
                     </div>
                 `;
@@ -525,11 +557,11 @@
             });
         }
 
-        // Render buy signals
-        renderReportArticles(data['步骤2_交易策略分析']['买入信号标的报告'], 'buy-signals-stocks');
+        // Render buy signals (使用过滤后的 validBuyList)
+        renderReportArticles(validBuyList, 'buy-signals-stocks');
 
-        // Render hold/observe signals
-        renderReportArticles(data['步骤2_交易策略分析']['持有观察标的报告'], 'hold-observe-stocks');
+        // Render hold/observe signals (使用过滤后的 validHoldList)
+        renderReportArticles(validHoldList, 'hold-observe-stocks');
 
         // Fill in footer
         document.getElementById('footer-copyright').innerHTML = `&copy; 2025 ${data['模型名称']}. 版权所有。`;
