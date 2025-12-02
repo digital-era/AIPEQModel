@@ -4,20 +4,20 @@
             {
                 "代码": 518880,
                 "名称": "黄金ETF",
-                "年化夏普率": 2.891282842568201,
-                "最新价格": 9.16
-            },
-            {
-                "代码": 513290,
-                "名称": "纳指生物",
-                "年化夏普率": 2.7696000186752276,
-                "最新价格": 1.59
+                "年化夏普率": 2.540532806218292,
+                "最新价格": 9.11
             },
             {
                 "代码": 512800,
                 "名称": "银行ETF",
                 "年化夏普率": 1.9857973041311259,
                 "最新价格": 0.84
+            },
+            {
+                "代码": 513290,
+                "名称": "纳指生物",
+                "年化夏普率": 1.9155435309308748,
+                "最新价格": 1.56
             }
         ],
         "grid_models": {
@@ -62,47 +62,6 @@
                     }
                 ]
             },
-            "513290": {
-                "name": "纳指生物",
-                "code": "513290",
-                "price_range": "1.415 - 1.609",
-                "total_capital": 100000,
-                "capital_per_grid": 25000.0,
-                "grids": [
-                    {
-                        "level": "买入档 1",
-                        "buy_price": 1.415,
-                        "sell_price": 1.464,
-                        "capital_amount": 25000.0,
-                        "estimated_shares": 17600,
-                        "estimated_profit": 853.6
-                    },
-                    {
-                        "level": "买入档 2",
-                        "buy_price": 1.464,
-                        "sell_price": 1.512,
-                        "capital_amount": 25000.0,
-                        "estimated_shares": 17000,
-                        "estimated_profit": 824.5
-                    },
-                    {
-                        "level": "买入档 3",
-                        "buy_price": 1.512,
-                        "sell_price": 1.56,
-                        "capital_amount": 25000.0,
-                        "estimated_shares": 16500,
-                        "estimated_profit": 800.25
-                    },
-                    {
-                        "level": "买入档 4",
-                        "buy_price": 1.56,
-                        "sell_price": 1.609,
-                        "capital_amount": 25000.0,
-                        "estimated_shares": 16000,
-                        "estimated_profit": 776.0
-                    }
-                ]
-            },
             "512800": {
                 "name": "银行ETF",
                 "code": "512800",
@@ -143,75 +102,157 @@
                         "estimated_profit": 192.4
                     }
                 ]
+            },
+            "513290": {
+                "name": "纳指生物",
+                "code": "513290",
+                "price_range": "1.415 - 1.609",
+                "total_capital": 100000,
+                "capital_per_grid": 25000.0,
+                "grids": [
+                    {
+                        "level": "买入档 1",
+                        "buy_price": 1.415,
+                        "sell_price": 1.464,
+                        "capital_amount": 25000.0,
+                        "estimated_shares": 17600,
+                        "estimated_profit": 853.6
+                    },
+                    {
+                        "level": "买入档 2",
+                        "buy_price": 1.464,
+                        "sell_price": 1.512,
+                        "capital_amount": 25000.0,
+                        "estimated_shares": 17000,
+                        "estimated_profit": 824.5
+                    },
+                    {
+                        "level": "买入档 3",
+                        "buy_price": 1.512,
+                        "sell_price": 1.56,
+                        "capital_amount": 25000.0,
+                        "estimated_shares": 16500,
+                        "estimated_profit": 800.25
+                    },
+                    {
+                        "level": "买入档 4",
+                        "buy_price": 1.56,
+                        "sell_price": 1.609,
+                        "capital_amount": 25000.0,
+                        "estimated_shares": 16000,
+                        "estimated_profit": 776.0
+                    }
+                ]
             }
         }
     },
     "STK": {
         "top_3_sharpe_ratio": [
             {
-                "代码": "300456",
-                "名称": "赛微电子",
-                "年化夏普率": 8.609506767563355,
-                "最新收盘价": 50.69,
-                "PotScore": 2.61,
-                "总净流入占比_5日总和": -8.760000000000002
+                "代码": "603929",
+                "名称": "亚翔集成",
+                "年化夏普率": 6.613488747752796,
+                "最新收盘价": 68.1,
+                "PotScore": 1.17,
+                "总净流入占比_5日总和": 23.49
+            },
+            {
+                "代码": "603355",
+                "名称": "莱克电气",
+                "年化夏普率": 6.44707724999824,
+                "最新收盘价": 33.52,
+                "PotScore": 0.81,
+                "总净流入占比_5日总和": 49.48
             },
             {
                 "代码": "600803",
                 "名称": "新奥股份",
-                "年化夏普率": 6.933660401088991,
-                "最新收盘价": 21.97,
-                "PotScore": 0.1,
-                "总净流入占比_5日总和": 16.53
-            },
-            {
-                "代码": "603929",
-                "名称": "亚翔集成",
-                "年化夏普率": 5.626878326823099,
-                "最新收盘价": 62.59,
-                "PotScore": 0.97,
-                "总净流入占比_5日总和": 25.09
+                "年化夏普率": 5.906633600477318,
+                "最新收盘价": 21.76,
+                "PotScore": 0.09,
+                "总净流入占比_5日总和": -2.930000000000001
             }
         ],
         "grid_models": {
-            "300456": {
-                "name": "赛微电子",
-                "code": "300456",
-                "price_range": "25.120 - 50.690",
+            "603929": {
+                "name": "亚翔集成",
+                "code": "603929",
+                "price_range": "46.710 - 68.100",
                 "total_capital": 100000,
                 "capital_per_grid": 25000.0,
                 "grids": [
                     {
                         "level": "买入档 1",
-                        "buy_price": 25.12,
-                        "sell_price": 31.512,
+                        "buy_price": 46.71,
+                        "sell_price": 52.057,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 900,
-                        "estimated_profit": 5753.25
+                        "estimated_shares": 500,
+                        "estimated_profit": 2673.75
                     },
                     {
                         "level": "买入档 2",
-                        "buy_price": 31.512,
-                        "sell_price": 37.905,
+                        "buy_price": 52.057,
+                        "sell_price": 57.405,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 700,
-                        "estimated_profit": 4474.75
+                        "estimated_shares": 400,
+                        "estimated_profit": 2139.0
                     },
                     {
                         "level": "买入档 3",
-                        "buy_price": 37.905,
-                        "sell_price": 44.297,
+                        "buy_price": 57.405,
+                        "sell_price": 62.752,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 600,
-                        "estimated_profit": 3835.5
+                        "estimated_shares": 400,
+                        "estimated_profit": 2139.0
                     },
                     {
                         "level": "买入档 4",
-                        "buy_price": 44.297,
-                        "sell_price": 50.69,
+                        "buy_price": 62.752,
+                        "sell_price": 68.1,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 500,
-                        "estimated_profit": 3196.25
+                        "estimated_shares": 300,
+                        "estimated_profit": 1604.25
+                    }
+                ]
+            },
+            "603355": {
+                "name": "莱克电气",
+                "code": "603355",
+                "price_range": "25.260 - 33.520",
+                "total_capital": 100000,
+                "capital_per_grid": 25000.0,
+                "grids": [
+                    {
+                        "level": "买入档 1",
+                        "buy_price": 25.26,
+                        "sell_price": 27.325,
+                        "capital_amount": 25000.0,
+                        "estimated_shares": 900,
+                        "estimated_profit": 1858.5
+                    },
+                    {
+                        "level": "买入档 2",
+                        "buy_price": 27.325,
+                        "sell_price": 29.39,
+                        "capital_amount": 25000.0,
+                        "estimated_shares": 900,
+                        "estimated_profit": 1858.5
+                    },
+                    {
+                        "level": "买入档 3",
+                        "buy_price": 29.39,
+                        "sell_price": 31.455,
+                        "capital_amount": 25000.0,
+                        "estimated_shares": 800,
+                        "estimated_profit": 1652.0
+                    },
+                    {
+                        "level": "买入档 4",
+                        "buy_price": 31.455,
+                        "sell_price": 33.52,
+                        "capital_amount": 25000.0,
+                        "estimated_shares": 700,
+                        "estimated_profit": 1445.5
                     }
                 ]
             },
@@ -253,47 +294,6 @@
                         "capital_amount": 25000.0,
                         "estimated_shares": 1100,
                         "estimated_profit": 577.5
-                    }
-                ]
-            },
-            "603929": {
-                "name": "亚翔集成",
-                "code": "603929",
-                "price_range": "46.710 - 62.590",
-                "total_capital": 100000,
-                "capital_per_grid": 25000.0,
-                "grids": [
-                    {
-                        "level": "买入档 1",
-                        "buy_price": 46.71,
-                        "sell_price": 50.68,
-                        "capital_amount": 25000.0,
-                        "estimated_shares": 500,
-                        "estimated_profit": 1985.0
-                    },
-                    {
-                        "level": "买入档 2",
-                        "buy_price": 50.68,
-                        "sell_price": 54.65,
-                        "capital_amount": 25000.0,
-                        "estimated_shares": 400,
-                        "estimated_profit": 1588.0
-                    },
-                    {
-                        "level": "买入档 3",
-                        "buy_price": 54.65,
-                        "sell_price": 58.62,
-                        "capital_amount": 25000.0,
-                        "estimated_shares": 400,
-                        "estimated_profit": 1588.0
-                    },
-                    {
-                        "level": "买入档 4",
-                        "buy_price": 58.62,
-                        "sell_price": 62.59,
-                        "capital_amount": 25000.0,
-                        "estimated_shares": 400,
-                        "estimated_profit": 1588.0
                     }
                 ]
             }
