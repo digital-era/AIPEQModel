@@ -4,19 +4,19 @@
             {
                 "代码": 513290,
                 "名称": "纳指生物",
-                "年化夏普率": 5.491476142900097,
-                "最新价格": 1.59
+                "年化夏普率": 6.482112258319672,
+                "最新价格": 1.64
             },
             {
                 "代码": 518880,
                 "名称": "黄金ETF",
-                "年化夏普率": 2.9107522258104597,
-                "最新价格": 9.1
+                "年化夏普率": 2.78731786780119,
+                "最新价格": 9.06
             },
             {
                 "代码": 516020,
                 "名称": "化工ETF",
-                "年化夏普率": 1.9184085143311147,
+                "年化夏普率": 1.8731776914879716,
                 "最新价格": 0.79
             }
         ],
@@ -24,41 +24,41 @@
             "513290": {
                 "name": "纳指生物",
                 "code": "513290",
-                "price_range": "1.415 - 1.609",
+                "price_range": "1.415 - 1.640",
                 "total_capital": 100000,
                 "capital_per_grid": 25000.0,
                 "grids": [
                     {
                         "level": "买入档 1",
                         "buy_price": 1.415,
-                        "sell_price": 1.464,
+                        "sell_price": 1.471,
                         "capital_amount": 25000.0,
                         "estimated_shares": 17600,
-                        "estimated_profit": 853.6
+                        "estimated_profit": 990.0
                     },
                     {
                         "level": "买入档 2",
-                        "buy_price": 1.464,
-                        "sell_price": 1.512,
+                        "buy_price": 1.471,
+                        "sell_price": 1.527,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 17000,
-                        "estimated_profit": 824.5
+                        "estimated_shares": 16900,
+                        "estimated_profit": 950.62
                     },
                     {
                         "level": "买入档 3",
-                        "buy_price": 1.512,
-                        "sell_price": 1.56,
+                        "buy_price": 1.527,
+                        "sell_price": 1.584,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 16500,
-                        "estimated_profit": 800.25
+                        "estimated_shares": 16300,
+                        "estimated_profit": 916.88
                     },
                     {
                         "level": "买入档 4",
-                        "buy_price": 1.56,
-                        "sell_price": 1.609,
+                        "buy_price": 1.584,
+                        "sell_price": 1.64,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 16000,
-                        "estimated_profit": 776.0
+                        "estimated_shares": 15700,
+                        "estimated_profit": 883.12
                     }
                 ]
             },
@@ -151,26 +151,26 @@
             {
                 "代码": "603355",
                 "名称": "莱克电气",
-                "年化夏普率": 6.850653726653089,
-                "最新收盘价": 34.2,
-                "PotScore": 0.89,
-                "总净流入占比_5日总和": 58.92
+                "年化夏普率": 7.378454795871227,
+                "最新收盘价": 33.98,
+                "PotScore": 0.58,
+                "总净流入占比_5日总和": 46.05
             },
             {
-                "代码": "600803",
-                "名称": "新奥股份",
-                "年化夏普率": 6.675219950845151,
-                "最新收盘价": 22.02,
-                "PotScore": 0.07,
-                "总净流入占比_5日总和": -10.38
+                "代码": "300456",
+                "名称": "赛微电子",
+                "年化夏普率": 6.3035731106421995,
+                "最新收盘价": 46.75,
+                "PotScore": 1.81,
+                "总净流入占比_5日总和": -37.05
             },
             {
-                "代码": "000333",
-                "名称": "美的集团",
-                "年化夏普率": 6.4961774384461135,
-                "最新收盘价": 82.17,
-                "PotScore": 0.15,
-                "总净流入占比_5日总和": 41.0
+                "代码": "600750",
+                "名称": "江中药业",
+                "年化夏普率": 5.938710585334057,
+                "最新收盘价": 23.19,
+                "PotScore": 0.22,
+                "总净流入占比_5日总和": -41.91
             }
         ],
         "grid_models": {
@@ -215,85 +215,85 @@
                     }
                 ]
             },
-            "600803": {
-                "name": "新奥股份",
-                "code": "600803",
-                "price_range": "19.870 - 22.020",
+            "300456": {
+                "name": "赛微电子",
+                "code": "300456",
+                "price_range": "25.120 - 58.430",
                 "total_capital": 100000,
                 "capital_per_grid": 25000.0,
                 "grids": [
                     {
                         "level": "买入档 1",
-                        "buy_price": 19.87,
-                        "sell_price": 20.407,
+                        "buy_price": 25.12,
+                        "sell_price": 33.448,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 1200,
-                        "estimated_profit": 645.0
+                        "estimated_shares": 900,
+                        "estimated_profit": 7494.75
                     },
                     {
                         "level": "买入档 2",
-                        "buy_price": 20.407,
-                        "sell_price": 20.945,
+                        "buy_price": 33.448,
+                        "sell_price": 41.775,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 1200,
-                        "estimated_profit": 645.0
+                        "estimated_shares": 700,
+                        "estimated_profit": 5829.25
                     },
                     {
                         "level": "买入档 3",
-                        "buy_price": 20.945,
-                        "sell_price": 21.483,
+                        "buy_price": 41.775,
+                        "sell_price": 50.103,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 1100,
-                        "estimated_profit": 591.25
+                        "estimated_shares": 500,
+                        "estimated_profit": 4163.75
                     },
                     {
                         "level": "买入档 4",
-                        "buy_price": 21.483,
-                        "sell_price": 22.02,
+                        "buy_price": 50.103,
+                        "sell_price": 58.43,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 1100,
-                        "estimated_profit": 591.25
+                        "estimated_shares": 400,
+                        "estimated_profit": 3331.0
                     }
                 ]
             },
-            "000333": {
-                "name": "美的集团",
-                "code": "000333",
-                "price_range": "75.160 - 82.170",
+            "600750": {
+                "name": "江中药业",
+                "code": "600750",
+                "price_range": "21.210 - 23.190",
                 "total_capital": 100000,
                 "capital_per_grid": 25000.0,
                 "grids": [
                     {
                         "level": "买入档 1",
-                        "buy_price": 75.16,
-                        "sell_price": 76.912,
+                        "buy_price": 21.21,
+                        "sell_price": 21.705,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 300,
-                        "estimated_profit": 525.75
+                        "estimated_shares": 1100,
+                        "estimated_profit": 544.5
                     },
                     {
                         "level": "买入档 2",
-                        "buy_price": 76.912,
-                        "sell_price": 78.665,
+                        "buy_price": 21.705,
+                        "sell_price": 22.2,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 300,
-                        "estimated_profit": 525.75
+                        "estimated_shares": 1100,
+                        "estimated_profit": 544.5
                     },
                     {
                         "level": "买入档 3",
-                        "buy_price": 78.665,
-                        "sell_price": 80.418,
+                        "buy_price": 22.2,
+                        "sell_price": 22.695,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 300,
-                        "estimated_profit": 525.75
+                        "estimated_shares": 1100,
+                        "estimated_profit": 544.5
                     },
                     {
                         "level": "买入档 4",
-                        "buy_price": 80.418,
-                        "sell_price": 82.17,
+                        "buy_price": 22.695,
+                        "sell_price": 23.19,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 300,
-                        "estimated_profit": 525.75
+                        "estimated_shares": 1100,
+                        "estimated_profit": 544.5
                     }
                 ]
             }
