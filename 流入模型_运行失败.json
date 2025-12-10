@@ -1,0 +1,4 @@
+{
+    "运行状态": "失败",
+    "错误信息": "❌ 错误：无法找到 'top_10_continuous_inflow_codes' 或 'df_combined'。请先运行前面的数据筛选步骤。"
+}
