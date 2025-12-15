@@ -2,25 +2,66 @@
     "ETF": {
         "top_3_sharpe_ratio": [
             {
-                "代码": 515880,
-                "名称": "通信ETF",
-                "年化夏普率": 3.933038847667481,
-                "最新价格": 2.98
+                "代码": 518880,
+                "名称": "黄金ETF",
+                "年化夏普率": 4.644935570865183,
+                "最新价格": 9.35
             },
             {
-                "代码": 513290,
-                "名称": "纳指生物",
-                "年化夏普率": 2.6350622322033708,
-                "最新价格": 1.58
+                "代码": 515880,
+                "名称": "通信ETF",
+                "年化夏普率": 3.7640510709691144,
+                "最新价格": 2.9
             },
             {
                 "代码": 512660,
                 "名称": "军工ETF",
-                "年化夏普率": 2.4481551344681614,
-                "最新价格": 1.23
+                "年化夏普率": 2.8624966899277755,
+                "最新价格": 1.25
             }
         ],
         "grid_models": {
+            "518880": {
+                "name": "黄金ETF",
+                "code": "518880",
+                "price_range": "8.777 - 9.350",
+                "total_capital": 100000,
+                "capital_per_grid": 25000.0,
+                "grids": [
+                    {
+                        "level": "买入档 1",
+                        "buy_price": 8.777,
+                        "sell_price": 8.92,
+                        "capital_amount": 25000.0,
+                        "estimated_shares": 2800,
+                        "estimated_profit": 401.1
+                    },
+                    {
+                        "level": "买入档 2",
+                        "buy_price": 8.92,
+                        "sell_price": 9.063,
+                        "capital_amount": 25000.0,
+                        "estimated_shares": 2800,
+                        "estimated_profit": 401.1
+                    },
+                    {
+                        "level": "买入档 3",
+                        "buy_price": 9.063,
+                        "sell_price": 9.207,
+                        "capital_amount": 25000.0,
+                        "estimated_shares": 2700,
+                        "estimated_profit": 386.78
+                    },
+                    {
+                        "level": "买入档 4",
+                        "buy_price": 9.207,
+                        "sell_price": 9.35,
+                        "capital_amount": 25000.0,
+                        "estimated_shares": 2700,
+                        "estimated_profit": 386.78
+                    }
+                ]
+            },
             "515880": {
                 "name": "通信ETF",
                 "code": "515880",
@@ -62,85 +103,44 @@
                     }
                 ]
             },
-            "513290": {
-                "name": "纳指生物",
-                "code": "513290",
-                "price_range": "1.457 - 1.635",
-                "total_capital": 100000,
-                "capital_per_grid": 25000.0,
-                "grids": [
-                    {
-                        "level": "买入档 1",
-                        "buy_price": 1.457,
-                        "sell_price": 1.502,
-                        "capital_amount": 25000.0,
-                        "estimated_shares": 17100,
-                        "estimated_profit": 760.95
-                    },
-                    {
-                        "level": "买入档 2",
-                        "buy_price": 1.502,
-                        "sell_price": 1.546,
-                        "capital_amount": 25000.0,
-                        "estimated_shares": 16600,
-                        "estimated_profit": 738.7
-                    },
-                    {
-                        "level": "买入档 3",
-                        "buy_price": 1.546,
-                        "sell_price": 1.591,
-                        "capital_amount": 25000.0,
-                        "estimated_shares": 16100,
-                        "estimated_profit": 716.45
-                    },
-                    {
-                        "level": "买入档 4",
-                        "buy_price": 1.591,
-                        "sell_price": 1.635,
-                        "capital_amount": 25000.0,
-                        "estimated_shares": 15700,
-                        "estimated_profit": 698.65
-                    }
-                ]
-            },
             "512660": {
                 "name": "军工ETF",
                 "code": "512660",
-                "price_range": "1.142 - 1.230",
+                "price_range": "1.142 - 1.250",
                 "total_capital": 100000,
                 "capital_per_grid": 25000.0,
                 "grids": [
                     {
                         "level": "买入档 1",
                         "buy_price": 1.142,
-                        "sell_price": 1.164,
+                        "sell_price": 1.169,
                         "capital_amount": 25000.0,
                         "estimated_shares": 21800,
-                        "estimated_profit": 479.6
+                        "estimated_profit": 588.6
                     },
                     {
                         "level": "买入档 2",
-                        "buy_price": 1.164,
-                        "sell_price": 1.186,
+                        "buy_price": 1.169,
+                        "sell_price": 1.196,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 21400,
-                        "estimated_profit": 470.8
+                        "estimated_shares": 21300,
+                        "estimated_profit": 575.1
                     },
                     {
                         "level": "买入档 3",
-                        "buy_price": 1.186,
-                        "sell_price": 1.208,
+                        "buy_price": 1.196,
+                        "sell_price": 1.223,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 21000,
-                        "estimated_profit": 462.0
+                        "estimated_shares": 20900,
+                        "estimated_profit": 564.3
                     },
                     {
                         "level": "买入档 4",
-                        "buy_price": 1.208,
-                        "sell_price": 1.23,
+                        "buy_price": 1.223,
+                        "sell_price": 1.25,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 20600,
-                        "estimated_profit": 453.2
+                        "estimated_shares": 20400,
+                        "estimated_profit": 550.8
                     }
                 ]
             }
@@ -149,72 +149,31 @@
     "STK": {
         "top_3_sharpe_ratio": [
             {
-                "代码": "600750",
-                "名称": "江中药业",
-                "年化夏普率": 6.5109816367767515,
-                "最新收盘价": 24.38,
-                "PotScore": 0.52,
-                "总净流入占比_5日总和": 33.95
-            },
-            {
                 "代码": "603766",
                 "名称": "隆鑫通用",
-                "年化夏普率": 5.638790777811808,
-                "最新收盘价": 16.17,
-                "PotScore": 0.55,
-                "总净流入占比_5日总和": -15.64
+                "年化夏普率": 6.860494003665666,
+                "最新收盘价": 15.92,
+                "PotScore": 0.45,
+                "总净流入占比_5日总和": -21.95
+            },
+            {
+                "代码": "600750",
+                "名称": "江中药业",
+                "年化夏普率": 6.520474125780132,
+                "最新收盘价": 24.32,
+                "PotScore": 0.32,
+                "总净流入占比_5日总和": 35.82
             },
             {
                 "代码": "603129",
                 "名称": "春风动力",
-                "年化夏普率": 5.198463380746391,
-                "最新收盘价": 292.6,
-                "PotScore": 0.29,
-                "总净流入占比_5日总和": -3.48
+                "年化夏普率": 5.983858052316327,
+                "最新收盘价": 284.82,
+                "PotScore": 0.36,
+                "总净流入占比_5日总和": -29.09
             }
         ],
         "grid_models": {
-            "600750": {
-                "name": "江中药业",
-                "code": "600750",
-                "price_range": "21.460 - 24.380",
-                "total_capital": 100000,
-                "capital_per_grid": 25000.0,
-                "grids": [
-                    {
-                        "level": "买入档 1",
-                        "buy_price": 21.46,
-                        "sell_price": 22.19,
-                        "capital_amount": 25000.0,
-                        "estimated_shares": 1100,
-                        "estimated_profit": 803.0
-                    },
-                    {
-                        "level": "买入档 2",
-                        "buy_price": 22.19,
-                        "sell_price": 22.92,
-                        "capital_amount": 25000.0,
-                        "estimated_shares": 1100,
-                        "estimated_profit": 803.0
-                    },
-                    {
-                        "level": "买入档 3",
-                        "buy_price": 22.92,
-                        "sell_price": 23.65,
-                        "capital_amount": 25000.0,
-                        "estimated_shares": 1000,
-                        "estimated_profit": 730.0
-                    },
-                    {
-                        "level": "买入档 4",
-                        "buy_price": 23.65,
-                        "sell_price": 24.38,
-                        "capital_amount": 25000.0,
-                        "estimated_shares": 1000,
-                        "estimated_profit": 730.0
-                    }
-                ]
-            },
             "603766": {
                 "name": "隆鑫通用",
                 "code": "603766",
@@ -253,6 +212,47 @@
                         "capital_amount": 25000.0,
                         "estimated_shares": 1600,
                         "estimated_profit": 1432.0
+                    }
+                ]
+            },
+            "600750": {
+                "name": "江中药业",
+                "code": "600750",
+                "price_range": "21.460 - 24.380",
+                "total_capital": 100000,
+                "capital_per_grid": 25000.0,
+                "grids": [
+                    {
+                        "level": "买入档 1",
+                        "buy_price": 21.46,
+                        "sell_price": 22.19,
+                        "capital_amount": 25000.0,
+                        "estimated_shares": 1100,
+                        "estimated_profit": 803.0
+                    },
+                    {
+                        "level": "买入档 2",
+                        "buy_price": 22.19,
+                        "sell_price": 22.92,
+                        "capital_amount": 25000.0,
+                        "estimated_shares": 1100,
+                        "estimated_profit": 803.0
+                    },
+                    {
+                        "level": "买入档 3",
+                        "buy_price": 22.92,
+                        "sell_price": 23.65,
+                        "capital_amount": 25000.0,
+                        "estimated_shares": 1000,
+                        "estimated_profit": 730.0
+                    },
+                    {
+                        "level": "买入档 4",
+                        "buy_price": 23.65,
+                        "sell_price": 24.38,
+                        "capital_amount": 25000.0,
+                        "estimated_shares": 1000,
+                        "estimated_profit": 730.0
                     }
                 ]
             },
