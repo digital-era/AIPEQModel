@@ -4,19 +4,19 @@
             {
                 "代码": 518880,
                 "名称": "黄金ETF",
-                "年化夏普率": 3.3012928610351815,
-                "最新价格": 9.24
+                "年化夏普率": 5.156701256861167,
+                "最新价格": 9.31
             },
             {
                 "代码": 515880,
                 "名称": "通信ETF",
-                "年化夏普率": 2.8899039595827056,
-                "最新价格": 2.83
+                "年化夏普率": 4.143927934655941,
+                "最新价格": 2.98
             },
             {
                 "代码": 512660,
                 "名称": "军工ETF",
-                "年化夏普率": 2.029694683644333,
+                "年化夏普率": 2.7830682909367614,
                 "最新价格": 1.23
             }
         ],
@@ -106,41 +106,41 @@
             "512660": {
                 "name": "军工ETF",
                 "code": "512660",
-                "price_range": "1.142 - 1.233",
+                "price_range": "1.142 - 1.245",
                 "total_capital": 100000,
                 "capital_per_grid": 25000.0,
                 "grids": [
                     {
                         "level": "买入档 1",
                         "buy_price": 1.142,
-                        "sell_price": 1.165,
+                        "sell_price": 1.168,
                         "capital_amount": 25000.0,
                         "estimated_shares": 21800,
-                        "estimated_profit": 495.95
+                        "estimated_profit": 561.35
                     },
                     {
                         "level": "买入档 2",
-                        "buy_price": 1.165,
-                        "sell_price": 1.188,
+                        "buy_price": 1.168,
+                        "sell_price": 1.194,
                         "capital_amount": 25000.0,
                         "estimated_shares": 21400,
-                        "estimated_profit": 486.85
+                        "estimated_profit": 551.05
                     },
                     {
                         "level": "买入档 3",
-                        "buy_price": 1.188,
-                        "sell_price": 1.21,
+                        "buy_price": 1.194,
+                        "sell_price": 1.219,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 21000,
-                        "estimated_profit": 477.75
+                        "estimated_shares": 20900,
+                        "estimated_profit": 538.18
                     },
                     {
                         "level": "买入档 4",
-                        "buy_price": 1.21,
-                        "sell_price": 1.233,
+                        "buy_price": 1.219,
+                        "sell_price": 1.245,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 20600,
-                        "estimated_profit": 468.65
+                        "estimated_shares": 20500,
+                        "estimated_profit": 527.87
                     }
                 ]
             }
@@ -149,31 +149,72 @@
     "STK": {
         "top_3_sharpe_ratio": [
             {
-                "代码": "600750",
-                "名称": "江中药业",
-                "年化夏普率": 6.693448908354097,
-                "最新收盘价": 24.45,
-                "PotScore": 0.24,
-                "总净流入占比_5日总和": 27.37
-            },
-            {
                 "代码": "603766",
                 "名称": "隆鑫通用",
-                "年化夏普率": 6.296173877790709,
-                "最新收盘价": 15.76,
-                "PotScore": 0.43,
-                "总净流入占比_5日总和": -25.52
+                "年化夏普率": 7.9681653084747905,
+                "最新收盘价": 16.29,
+                "PotScore": 0.39,
+                "总净流入占比_5日总和": -34.15
             },
             {
-                "代码": "603129",
-                "名称": "春风动力",
-                "年化夏普率": 5.70758679686507,
-                "最新收盘价": 283.73,
-                "PotScore": 0.36,
-                "总净流入占比_5日总和": -50.57000000000001
+                "代码": "600750",
+                "名称": "江中药业",
+                "年化夏普率": 6.330853529882784,
+                "最新收盘价": 24.41,
+                "PotScore": 0.14,
+                "总净流入占比_5日总和": 22.12
+            },
+            {
+                "代码": "600066",
+                "名称": "宇通客车",
+                "年化夏普率": 6.207238042745483,
+                "最新收盘价": 34.47,
+                "PotScore": 0.59,
+                "总净流入占比_5日总和": -46.01000000000001
             }
         ],
         "grid_models": {
+            "603766": {
+                "name": "隆鑫通用",
+                "code": "603766",
+                "price_range": "12.590 - 16.290",
+                "total_capital": 100000,
+                "capital_per_grid": 25000.0,
+                "grids": [
+                    {
+                        "level": "买入档 1",
+                        "buy_price": 12.59,
+                        "sell_price": 13.515,
+                        "capital_amount": 25000.0,
+                        "estimated_shares": 1900,
+                        "estimated_profit": 1757.5
+                    },
+                    {
+                        "level": "买入档 2",
+                        "buy_price": 13.515,
+                        "sell_price": 14.44,
+                        "capital_amount": 25000.0,
+                        "estimated_shares": 1800,
+                        "estimated_profit": 1665.0
+                    },
+                    {
+                        "level": "买入档 3",
+                        "buy_price": 14.44,
+                        "sell_price": 15.365,
+                        "capital_amount": 25000.0,
+                        "estimated_shares": 1700,
+                        "estimated_profit": 1572.5
+                    },
+                    {
+                        "level": "买入档 4",
+                        "buy_price": 15.365,
+                        "sell_price": 16.29,
+                        "capital_amount": 25000.0,
+                        "estimated_shares": 1600,
+                        "estimated_profit": 1480.0
+                    }
+                ]
+            },
             "600750": {
                 "name": "江中药业",
                 "code": "600750",
@@ -215,85 +256,44 @@
                     }
                 ]
             },
-            "603766": {
-                "name": "隆鑫通用",
-                "code": "603766",
-                "price_range": "12.590 - 16.170",
+            "600066": {
+                "name": "宇通客车",
+                "code": "600066",
+                "price_range": "30.450 - 34.470",
                 "total_capital": 100000,
                 "capital_per_grid": 25000.0,
                 "grids": [
                     {
                         "level": "买入档 1",
-                        "buy_price": 12.59,
-                        "sell_price": 13.485,
+                        "buy_price": 30.45,
+                        "sell_price": 31.455,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 1900,
-                        "estimated_profit": 1700.5
+                        "estimated_shares": 800,
+                        "estimated_profit": 804.0
                     },
                     {
                         "level": "买入档 2",
-                        "buy_price": 13.485,
-                        "sell_price": 14.38,
+                        "buy_price": 31.455,
+                        "sell_price": 32.46,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 1800,
-                        "estimated_profit": 1611.0
+                        "estimated_shares": 700,
+                        "estimated_profit": 703.5
                     },
                     {
                         "level": "买入档 3",
-                        "buy_price": 14.38,
-                        "sell_price": 15.275,
+                        "buy_price": 32.46,
+                        "sell_price": 33.465,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 1700,
-                        "estimated_profit": 1521.5
+                        "estimated_shares": 700,
+                        "estimated_profit": 703.5
                     },
                     {
                         "level": "买入档 4",
-                        "buy_price": 15.275,
-                        "sell_price": 16.17,
+                        "buy_price": 33.465,
+                        "sell_price": 34.47,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 1600,
-                        "estimated_profit": 1432.0
-                    }
-                ]
-            },
-            "603129": {
-                "name": "春风动力",
-                "code": "603129",
-                "price_range": "230.660 - 294.500",
-                "total_capital": 100000,
-                "capital_per_grid": 25000.0,
-                "grids": [
-                    {
-                        "level": "买入档 1",
-                        "buy_price": 230.66,
-                        "sell_price": 246.62,
-                        "capital_amount": 25000.0,
-                        "estimated_shares": 100,
-                        "estimated_profit": 1596.0
-                    },
-                    {
-                        "level": "买入档 2",
-                        "buy_price": 246.62,
-                        "sell_price": 262.58,
-                        "capital_amount": 25000.0,
-                        "estimated_shares": 100,
-                        "estimated_profit": 1596.0
-                    },
-                    {
-                        "level": "买入档 3",
-                        "buy_price": 262.58,
-                        "sell_price": 278.54,
-                        "capital_amount": 25000.0,
-                        "estimated_shares": 100,
-                        "estimated_profit": 1596.0
-                    },
-                    {
-                        "level": "买入档 4",
-                        "buy_price": 278.54,
-                        "sell_price": 294.5,
-                        "capital_amount": 25000.0,
-                        "estimated_shares": 100,
-                        "estimated_profit": 1596.0
+                        "estimated_shares": 700,
+                        "estimated_profit": 703.5
                     }
                 ]
             }
