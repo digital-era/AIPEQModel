@@ -4,61 +4,61 @@
             {
                 "代码": 518880,
                 "名称": "黄金ETF",
-                "年化夏普率": 5.156701256861167,
-                "最新价格": 9.31
+                "年化夏普率": 4.00816212908929,
+                "最新价格": 9.32
             },
             {
                 "代码": 515880,
                 "名称": "通信ETF",
-                "年化夏普率": 4.143927934655941,
-                "最新价格": 2.98
+                "年化夏普率": 3.5551069889106275,
+                "最新价格": 2.92
             },
             {
                 "代码": 512660,
                 "名称": "军工ETF",
-                "年化夏普率": 2.7830682909367614,
-                "最新价格": 1.23
+                "年化夏普率": 2.8895767307327644,
+                "最新价格": 1.24
             }
         ],
         "grid_models": {
             "518880": {
                 "name": "黄金ETF",
                 "code": "518880",
-                "price_range": "8.777 - 9.351",
+                "price_range": "8.828 - 9.351",
                 "total_capital": 100000,
                 "capital_per_grid": 25000.0,
                 "grids": [
                     {
                         "level": "买入档 1",
-                        "buy_price": 8.777,
-                        "sell_price": 8.921,
+                        "buy_price": 8.828,
+                        "sell_price": 8.959,
                         "capital_amount": 25000.0,
                         "estimated_shares": 2800,
-                        "estimated_profit": 401.8
+                        "estimated_profit": 366.1
                     },
                     {
                         "level": "买入档 2",
-                        "buy_price": 8.921,
-                        "sell_price": 9.064,
+                        "buy_price": 8.959,
+                        "sell_price": 9.09,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 2800,
-                        "estimated_profit": 401.8
+                        "estimated_shares": 2700,
+                        "estimated_profit": 353.03
                     },
                     {
                         "level": "买入档 3",
-                        "buy_price": 9.064,
-                        "sell_price": 9.207,
+                        "buy_price": 9.09,
+                        "sell_price": 9.22,
                         "capital_amount": 25000.0,
                         "estimated_shares": 2700,
-                        "estimated_profit": 387.45
+                        "estimated_profit": 353.02
                     },
                     {
                         "level": "买入档 4",
-                        "buy_price": 9.207,
+                        "buy_price": 9.22,
                         "sell_price": 9.351,
                         "capital_amount": 25000.0,
                         "estimated_shares": 2700,
-                        "estimated_profit": 387.45
+                        "estimated_profit": 353.03
                     }
                 ]
             },
@@ -149,151 +149,151 @@
     "STK": {
         "top_3_sharpe_ratio": [
             {
-                "代码": "603766",
-                "名称": "隆鑫通用",
-                "年化夏普率": 7.9681653084747905,
-                "最新收盘价": 16.29,
-                "PotScore": 0.39,
-                "总净流入占比_5日总和": -34.15
-            },
-            {
                 "代码": "600750",
                 "名称": "江中药业",
-                "年化夏普率": 6.330853529882784,
-                "最新收盘价": 24.41,
-                "PotScore": 0.14,
-                "总净流入占比_5日总和": 22.12
+                "年化夏普率": 7.470697796145615,
+                "最新收盘价": 24.85,
+                "PotScore": 0.13,
+                "总净流入占比_5日总和": 26.36
             },
             {
-                "代码": "600066",
-                "名称": "宇通客车",
-                "年化夏普率": 6.207238042745483,
-                "最新收盘价": 34.47,
-                "PotScore": 0.59,
-                "总净流入占比_5日总和": -46.01000000000001
+                "代码": "603766",
+                "名称": "隆鑫通用",
+                "年化夏普率": 6.217476449691042,
+                "最新收盘价": 16.07,
+                "PotScore": 0.38,
+                "总净流入占比_5日总和": -16.76
+            },
+            {
+                "代码": "002014",
+                "名称": "永新股份",
+                "年化夏普率": 5.129036707862309,
+                "最新收盘价": 12.27,
+                "PotScore": 0.31,
+                "总净流入占比_5日总和": 13.84
             }
         ],
         "grid_models": {
-            "603766": {
-                "name": "隆鑫通用",
-                "code": "603766",
-                "price_range": "12.590 - 16.290",
-                "total_capital": 100000,
-                "capital_per_grid": 25000.0,
-                "grids": [
-                    {
-                        "level": "买入档 1",
-                        "buy_price": 12.59,
-                        "sell_price": 13.515,
-                        "capital_amount": 25000.0,
-                        "estimated_shares": 1900,
-                        "estimated_profit": 1757.5
-                    },
-                    {
-                        "level": "买入档 2",
-                        "buy_price": 13.515,
-                        "sell_price": 14.44,
-                        "capital_amount": 25000.0,
-                        "estimated_shares": 1800,
-                        "estimated_profit": 1665.0
-                    },
-                    {
-                        "level": "买入档 3",
-                        "buy_price": 14.44,
-                        "sell_price": 15.365,
-                        "capital_amount": 25000.0,
-                        "estimated_shares": 1700,
-                        "estimated_profit": 1572.5
-                    },
-                    {
-                        "level": "买入档 4",
-                        "buy_price": 15.365,
-                        "sell_price": 16.29,
-                        "capital_amount": 25000.0,
-                        "estimated_shares": 1600,
-                        "estimated_profit": 1480.0
-                    }
-                ]
-            },
             "600750": {
                 "name": "江中药业",
                 "code": "600750",
-                "price_range": "21.460 - 24.450",
+                "price_range": "21.460 - 24.850",
                 "total_capital": 100000,
                 "capital_per_grid": 25000.0,
                 "grids": [
                     {
                         "level": "买入档 1",
                         "buy_price": 21.46,
-                        "sell_price": 22.207,
+                        "sell_price": 22.308,
                         "capital_amount": 25000.0,
                         "estimated_shares": 1100,
-                        "estimated_profit": 822.25
+                        "estimated_profit": 932.25
                     },
                     {
                         "level": "买入档 2",
-                        "buy_price": 22.207,
-                        "sell_price": 22.955,
+                        "buy_price": 22.308,
+                        "sell_price": 23.155,
                         "capital_amount": 25000.0,
                         "estimated_shares": 1100,
-                        "estimated_profit": 822.25
+                        "estimated_profit": 932.25
                     },
                     {
                         "level": "买入档 3",
-                        "buy_price": 22.955,
-                        "sell_price": 23.703,
+                        "buy_price": 23.155,
+                        "sell_price": 24.003,
                         "capital_amount": 25000.0,
                         "estimated_shares": 1000,
-                        "estimated_profit": 747.5
+                        "estimated_profit": 847.5
                     },
                     {
                         "level": "买入档 4",
-                        "buy_price": 23.703,
-                        "sell_price": 24.45,
+                        "buy_price": 24.003,
+                        "sell_price": 24.85,
                         "capital_amount": 25000.0,
                         "estimated_shares": 1000,
-                        "estimated_profit": 747.5
+                        "estimated_profit": 847.5
                     }
                 ]
             },
-            "600066": {
-                "name": "宇通客车",
-                "code": "600066",
-                "price_range": "30.450 - 34.470",
+            "603766": {
+                "name": "隆鑫通用",
+                "code": "603766",
+                "price_range": "13.010 - 16.290",
                 "total_capital": 100000,
                 "capital_per_grid": 25000.0,
                 "grids": [
                     {
                         "level": "买入档 1",
-                        "buy_price": 30.45,
-                        "sell_price": 31.455,
+                        "buy_price": 13.01,
+                        "sell_price": 13.83,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 800,
-                        "estimated_profit": 804.0
+                        "estimated_shares": 1900,
+                        "estimated_profit": 1558.0
                     },
                     {
                         "level": "买入档 2",
-                        "buy_price": 31.455,
-                        "sell_price": 32.46,
+                        "buy_price": 13.83,
+                        "sell_price": 14.65,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 700,
-                        "estimated_profit": 703.5
+                        "estimated_shares": 1800,
+                        "estimated_profit": 1476.0
                     },
                     {
                         "level": "买入档 3",
-                        "buy_price": 32.46,
-                        "sell_price": 33.465,
+                        "buy_price": 14.65,
+                        "sell_price": 15.47,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 700,
-                        "estimated_profit": 703.5
+                        "estimated_shares": 1700,
+                        "estimated_profit": 1394.0
                     },
                     {
                         "level": "买入档 4",
-                        "buy_price": 33.465,
-                        "sell_price": 34.47,
+                        "buy_price": 15.47,
+                        "sell_price": 16.29,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 700,
-                        "estimated_profit": 703.5
+                        "estimated_shares": 1600,
+                        "estimated_profit": 1312.0
+                    }
+                ]
+            },
+            "002014": {
+                "name": "永新股份",
+                "code": "002014",
+                "price_range": "11.220 - 12.270",
+                "total_capital": 100000,
+                "capital_per_grid": 25000.0,
+                "grids": [
+                    {
+                        "level": "买入档 1",
+                        "buy_price": 11.22,
+                        "sell_price": 11.482,
+                        "capital_amount": 25000.0,
+                        "estimated_shares": 2200,
+                        "estimated_profit": 577.5
+                    },
+                    {
+                        "level": "买入档 2",
+                        "buy_price": 11.482,
+                        "sell_price": 11.745,
+                        "capital_amount": 25000.0,
+                        "estimated_shares": 2100,
+                        "estimated_profit": 551.25
+                    },
+                    {
+                        "level": "买入档 3",
+                        "buy_price": 11.745,
+                        "sell_price": 12.008,
+                        "capital_amount": 25000.0,
+                        "estimated_shares": 2100,
+                        "estimated_profit": 551.25
+                    },
+                    {
+                        "level": "买入档 4",
+                        "buy_price": 12.008,
+                        "sell_price": 12.27,
+                        "capital_amount": 25000.0,
+                        "estimated_shares": 2000,
+                        "estimated_profit": 525.0
                     }
                 ]
             }
