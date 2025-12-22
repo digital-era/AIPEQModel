@@ -4,143 +4,143 @@
             {
                 "代码": 515880,
                 "名称": "通信ETF",
-                "年化夏普率": 5.9838487745040725,
-                "最新价格": 2.94
+                "年化夏普率": 6.934493625109542,
+                "最新价格": 3.08
             },
             {
                 "代码": 518880,
                 "名称": "黄金ETF",
-                "年化夏普率": 5.5111052293809575,
-                "最新价格": 9.31
+                "年化夏普率": 6.710108344460181,
+                "最新价格": 9.51
             },
             {
                 "代码": 159652,
                 "名称": "有色50ETF",
-                "年化夏普率": 4.261766851730588,
-                "最新价格": 1.56
+                "年化夏普率": 5.14949299208162,
+                "最新价格": 1.6
             }
         ],
         "grid_models": {
             "515880": {
                 "name": "通信ETF",
                 "code": "515880",
-                "price_range": "2.426 - 3.059",
+                "price_range": "2.426 - 3.080",
                 "total_capital": 100000,
                 "capital_per_grid": 25000.0,
                 "grids": [
                     {
                         "level": "买入档 1",
                         "buy_price": 2.426,
-                        "sell_price": 2.584,
+                        "sell_price": 2.59,
                         "capital_amount": 25000.0,
                         "estimated_shares": 10300,
-                        "estimated_profit": 1629.97
+                        "estimated_profit": 1684.05
                     },
                     {
                         "level": "买入档 2",
-                        "buy_price": 2.584,
-                        "sell_price": 2.743,
+                        "buy_price": 2.59,
+                        "sell_price": 2.753,
                         "capital_amount": 25000.0,
                         "estimated_shares": 9600,
-                        "estimated_profit": 1519.2
+                        "estimated_profit": 1569.6
                     },
                     {
                         "level": "买入档 3",
-                        "buy_price": 2.743,
-                        "sell_price": 2.901,
+                        "buy_price": 2.753,
+                        "sell_price": 2.917,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 9100,
-                        "estimated_profit": 1440.08
+                        "estimated_shares": 9000,
+                        "estimated_profit": 1471.5
                     },
                     {
                         "level": "买入档 4",
-                        "buy_price": 2.901,
-                        "sell_price": 3.059,
+                        "buy_price": 2.917,
+                        "sell_price": 3.08,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 8600,
-                        "estimated_profit": 1360.95
+                        "estimated_shares": 8500,
+                        "estimated_profit": 1389.75
                     }
                 ]
             },
             "518880": {
                 "name": "黄金ETF",
                 "code": "518880",
-                "price_range": "8.857 - 9.351",
+                "price_range": "8.857 - 9.510",
                 "total_capital": 100000,
                 "capital_per_grid": 25000.0,
                 "grids": [
                     {
                         "level": "买入档 1",
                         "buy_price": 8.857,
-                        "sell_price": 8.98,
+                        "sell_price": 9.02,
                         "capital_amount": 25000.0,
                         "estimated_shares": 2800,
-                        "estimated_profit": 345.8
+                        "estimated_profit": 457.1
                     },
                     {
                         "level": "买入档 2",
-                        "buy_price": 8.98,
-                        "sell_price": 9.104,
+                        "buy_price": 9.02,
+                        "sell_price": 9.183,
                         "capital_amount": 25000.0,
                         "estimated_shares": 2700,
-                        "estimated_profit": 333.45
+                        "estimated_profit": 440.77
                     },
                     {
                         "level": "买入档 3",
-                        "buy_price": 9.104,
-                        "sell_price": 9.228,
+                        "buy_price": 9.183,
+                        "sell_price": 9.347,
                         "capital_amount": 25000.0,
                         "estimated_shares": 2700,
-                        "estimated_profit": 333.45
+                        "estimated_profit": 440.78
                     },
                     {
                         "level": "买入档 4",
-                        "buy_price": 9.228,
-                        "sell_price": 9.351,
+                        "buy_price": 9.347,
+                        "sell_price": 9.51,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 2700,
-                        "estimated_profit": 333.45
+                        "estimated_shares": 2600,
+                        "estimated_profit": 424.45
                     }
                 ]
             },
             "159652": {
                 "name": "有色50ETF",
                 "code": "159652",
-                "price_range": "1.428 - 1.573",
+                "price_range": "1.428 - 1.600",
                 "total_capital": 100000,
                 "capital_per_grid": 25000.0,
                 "grids": [
                     {
                         "level": "买入档 1",
                         "buy_price": 1.428,
-                        "sell_price": 1.464,
+                        "sell_price": 1.471,
                         "capital_amount": 25000.0,
                         "estimated_shares": 17500,
-                        "estimated_profit": 634.37
+                        "estimated_profit": 752.5
                     },
                     {
                         "level": "买入档 2",
-                        "buy_price": 1.464,
-                        "sell_price": 1.5,
+                        "buy_price": 1.471,
+                        "sell_price": 1.514,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 17000,
-                        "estimated_profit": 616.25
+                        "estimated_shares": 16900,
+                        "estimated_profit": 726.7
                     },
                     {
                         "level": "买入档 3",
-                        "buy_price": 1.5,
-                        "sell_price": 1.537,
+                        "buy_price": 1.514,
+                        "sell_price": 1.557,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 16600,
-                        "estimated_profit": 601.75
+                        "estimated_shares": 16500,
+                        "estimated_profit": 709.5
                     },
                     {
                         "level": "买入档 4",
-                        "buy_price": 1.537,
-                        "sell_price": 1.573,
+                        "buy_price": 1.557,
+                        "sell_price": 1.6,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 16200,
-                        "estimated_profit": 587.25
+                        "estimated_shares": 16000,
+                        "estimated_profit": 688.0
                     }
                 ]
             }
@@ -151,26 +151,26 @@
             {
                 "代码": "600750",
                 "名称": "江中药业",
-                "年化夏普率": 8.46103194624577,
-                "最新收盘价": 24.63,
-                "PotScore": -0.02,
-                "总净流入占比_5日总和": 4.649999999999999
+                "年化夏普率": 8.499568477142763,
+                "最新收盘价": 24.73,
+                "PotScore": 0.06,
+                "总净流入占比_5日总和": 7.06
             },
             {
                 "代码": "603979",
                 "名称": "金诚信",
-                "年化夏普率": 7.923834222269319,
-                "最新收盘价": 74.56,
-                "PotScore": 0.48,
-                "总净流入占比_5日总和": 8.669999999999998
+                "年化夏普率": 8.015683516313768,
+                "最新收盘价": 75.16,
+                "PotScore": 0.44,
+                "总净流入占比_5日总和": 10.87
             },
             {
-                "代码": "000807",
-                "名称": "云铝股份",
-                "年化夏普率": 7.315684862450862,
-                "最新收盘价": 29.23,
-                "PotScore": 0.42,
-                "总净流入占比_5日总和": -3.73
+                "代码": "603596",
+                "名称": "伯特利",
+                "年化夏普率": 7.409336877487228,
+                "最新收盘价": 51.54,
+                "PotScore": 0.62,
+                "总净流入占比_5日总和": 28.93
             }
         ],
         "grid_models": {
@@ -218,82 +218,82 @@
             "603979": {
                 "name": "金诚信",
                 "code": "603979",
-                "price_range": "60.350 - 74.560",
+                "price_range": "60.350 - 75.160",
                 "total_capital": 100000,
                 "capital_per_grid": 25000.0,
                 "grids": [
                     {
                         "level": "买入档 1",
                         "buy_price": 60.35,
-                        "sell_price": 63.903,
+                        "sell_price": 64.052,
                         "capital_amount": 25000.0,
                         "estimated_shares": 400,
-                        "estimated_profit": 1421.0
+                        "estimated_profit": 1481.0
                     },
                     {
                         "level": "买入档 2",
-                        "buy_price": 63.903,
-                        "sell_price": 67.455,
+                        "buy_price": 64.052,
+                        "sell_price": 67.755,
                         "capital_amount": 25000.0,
                         "estimated_shares": 300,
-                        "estimated_profit": 1065.75
+                        "estimated_profit": 1110.75
                     },
                     {
                         "level": "买入档 3",
-                        "buy_price": 67.455,
-                        "sell_price": 71.008,
+                        "buy_price": 67.755,
+                        "sell_price": 71.457,
                         "capital_amount": 25000.0,
                         "estimated_shares": 300,
-                        "estimated_profit": 1065.75
+                        "estimated_profit": 1110.75
                     },
                     {
                         "level": "买入档 4",
-                        "buy_price": 71.008,
-                        "sell_price": 74.56,
+                        "buy_price": 71.457,
+                        "sell_price": 75.16,
                         "capital_amount": 25000.0,
                         "estimated_shares": 300,
-                        "estimated_profit": 1065.75
+                        "estimated_profit": 1110.75
                     }
                 ]
             },
-            "000807": {
-                "name": "云铝股份",
-                "code": "000807",
-                "price_range": "23.220 - 29.230",
+            "603596": {
+                "name": "伯特利",
+                "code": "603596",
+                "price_range": "43.340 - 51.540",
                 "total_capital": 100000,
                 "capital_per_grid": 25000.0,
                 "grids": [
                     {
                         "level": "买入档 1",
-                        "buy_price": 23.22,
-                        "sell_price": 24.723,
+                        "buy_price": 43.34,
+                        "sell_price": 45.39,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 1000,
-                        "estimated_profit": 1502.5
+                        "estimated_shares": 500,
+                        "estimated_profit": 1025.0
                     },
                     {
                         "level": "买入档 2",
-                        "buy_price": 24.723,
-                        "sell_price": 26.225,
+                        "buy_price": 45.39,
+                        "sell_price": 47.44,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 1000,
-                        "estimated_profit": 1502.5
+                        "estimated_shares": 500,
+                        "estimated_profit": 1025.0
                     },
                     {
                         "level": "买入档 3",
-                        "buy_price": 26.225,
-                        "sell_price": 27.727,
+                        "buy_price": 47.44,
+                        "sell_price": 49.49,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 900,
-                        "estimated_profit": 1352.25
+                        "estimated_shares": 500,
+                        "estimated_profit": 1025.0
                     },
                     {
                         "level": "买入档 4",
-                        "buy_price": 27.727,
-                        "sell_price": 29.23,
+                        "buy_price": 49.49,
+                        "sell_price": 51.54,
                         "capital_amount": 25000.0,
-                        "estimated_shares": 900,
-                        "estimated_profit": 1352.25
+                        "estimated_shares": 500,
+                        "estimated_profit": 1025.0
                     }
                 ]
             }
