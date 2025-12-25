@@ -361,15 +361,6 @@
                     <div class="metric-value" id="total-return"></div>
                     <div class="metric-description">期间累计收益</div>
                 </div>
-                
-                <!-- 【新增代码开始】 -->
-                <div class="metric-card">
-                    <div class="metric-label">标普500收益率</div>
-                    <div class="metric-value" id="sp500-return"></div>
-                    <div class="metric-description">同期基准表现</div>
-                </div>
-                <!-- 【新增代码结束】 -->
-                
                 <div class="metric-card">
                     <div class="metric-label">年化收益率</div>
                     <div class="metric-value" id="annualized-return"></div>
@@ -493,7 +484,6 @@
             const annualizedReturn = data["年化收益率"];
             const maxDrawdown = data["最大回撤率"];
             const sharpeRatio = data["夏普比率"];
-            const sp500Return = data["标普500收益率"]; // 【新增这一行】
 
             // --- 2. 填充报告摘要 (summary-paragraph-2) ---
             document.getElementById('summary-paragraph-1').textContent = `本报告基于${modelName}在${firstDate}至${lastDate}期间的交易表现数据，从总收益率、年化收益率、最大回撤率和夏普比率等多个维度对模型进行了全面评估。`;
@@ -549,30 +539,6 @@
             const sharpeRatioEl = document.getElementById('sharpe-ratio');
             sharpeRatioEl.textContent = formatNumber(sharpeRatio);
             sharpeRatioEl.classList.add(sharpeRatio >= 0 ? 'metric-neutral' : 'metric-negative');
-
-            // --- 兼容性处理：填充标普500数据 ---
-            const sp500Return = data["标普500收益率"]; // 如果没有该字段，则是 undefined
-            const sp500ReturnEl = document.getElementById('sp500-return');
-            
-            // 获取卡片容器（用于在没有数据时隐藏整个卡片，可选）
-            // 注意：HTML结构中 sp500ReturnEl 是 .metric-value，它的父级是 .metric-card
-            const sp500Card = sp500ReturnEl.closest('.metric-card'); 
-
-            if (typeof sp500Return === 'number') {
-                // 情况A：有数据
-                if (sp500Card) sp500Card.style.display = 'block'; // 确保显示
-                sp500ReturnEl.textContent = formatPercentage(sp500Return);
-                sp500ReturnEl.classList.add(sp500Return >= 0 ? 'metric-positive' : 'metric-negative');
-            } else {
-                // 情况B：没有数据 (undefined 或 null)
-                
-                // 选项1：显示 "N/A" (推荐，保持布局整齐)
-                // sp500ReturnEl.textContent = "N/A";
-                // sp500ReturnEl.classList.add('metric-neutral'); // 使用灰色/中性色
-                
-                // 选项2：如果想彻底隐藏该卡片，取消下面这行的注释
-                if (sp500Card) sp500Card.style.display = 'none';
-            }
             
             // ... (省略图表和表格填充部分，保持原样)
             // --- 4. 绘制收益表现图表 ---
