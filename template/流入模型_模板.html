@@ -464,16 +464,26 @@
                 portfolioTableBody.innerHTML = portfolioRowsHtml;
     
                 // --- 5. 提取并填充“组合预期历史表现”数据 ---
+                // --- 5. 提取并填充“组合预期历史表现”数据 (兼容性修改) ---
                 var performanceMetricsList = document.getElementById('performance-metrics-list');
-                var performanceDataRaw = data.结果.组合预期历史表现.raw_data;
+                
+                // 安全获取 raw_data：先判断上级节点是否存在，存在则取 raw_data，否则为 null
+                var performanceSection = data.结果.组合预期历史表现;
+                var performanceDataRaw = (performanceSection && performanceSection.raw_data) ? performanceSection.raw_data : null;
     
-                var annualReturn = (performanceDataRaw['预期年化收益率'] * 100).toFixed(2) + '%';
-                var annualVolatility = (performanceDataRaw['年化波动率(风险)'] * 100).toFixed(2) + '%';
-                var sharpeRatio = performanceDataRaw['预期夏普比率'].toFixed(2); 
-    
-                performanceMetricsList.innerHTML = '<li><strong>预期年化收益率:</strong> <span>' + annualReturn + '</span></li>' +
-                                                   '<li><strong>年化波动率 (风险):</strong> <span>' + annualVolatility + '</span></li>' +
-                                                   '<li><strong>预期夏普比率:</strong> <span>' + sharpeRatio + '</span></li>';
+                if (performanceDataRaw) {
+                    // --- 情况A：数据存在，正常解析 ---
+                    var annualReturn = (performanceDataRaw['预期年化收益率'] * 100).toFixed(2) + '%';
+                    var annualVolatility = (performanceDataRaw['年化波动率(风险)'] * 100).toFixed(2) + '%';
+                    var sharpeRatio = performanceDataRaw['预期夏普比率'].toFixed(2); 
+        
+                    performanceMetricsList.innerHTML = '<li><strong>预期年化收益率:</strong> <span>' + annualReturn + '</span></li>' +
+                                                       '<li><strong>年化波动率 (风险):</strong> <span>' + annualVolatility + '</span></li>' +
+                                                       '<li><strong>预期夏普比率:</strong> <span>' + sharpeRatio + '</span></li>';
+                } else {
+                    // --- 情况B：数据缺失，显示提示或隐藏 ---
+                    performanceMetricsList.innerHTML = '<li style="color: #999;">暂无历史表现数据</li>';
+                }
 
                 // --- **** 6. 新增：提取并填充“风控因子分析”数据 **** ---
                 var riskControlList = document.getElementById('risk-control-list');
